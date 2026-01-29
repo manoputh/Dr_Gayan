@@ -18,6 +18,14 @@ export default {
          validation: (Rule) => Rule.required().max(200),
       },
       {
+         name: "expertiseTags",
+         title: "Expertise Tags",
+         type: "array",
+         description: "Strategic descriptors/badges (e.g., Fortune 500 Advisory, ML Infrastructure)",
+         of: [{ type: "string" }],
+         validation: (Rule) => Rule.max(5),
+      },
+      {
          name: "ctaText",
          title: "Primary CTA Button Text",
          type: "string",

@@ -18,13 +18,6 @@ export default {
          validation: (Rule) => Rule.required(),
       },
       {
-         name: "featured",
-         title: "Featured Content",
-         type: "boolean",
-         description: "Feature this content in prominent positions (larger cards, hero sections)",
-         initialValue: false,
-      },
-      {
          name: "title",
          title: "Title",
          type: "string",
@@ -45,8 +38,8 @@ export default {
          name: "excerpt",
          title: "Excerpt",
          type: "text",
-         description: "Short summary for preview cards",
-        
+         description: "Short summary for preview cards (only for articles)",
+         hidden: ({ document }) => document?.contentType === "video",
       },
       {
          name: "youtubeUrl",
@@ -66,7 +59,8 @@ export default {
          name: "mainImage",
          title: "Main Image / Thumbnail",
          type: "image",
-         description: "Article featured image or custom video thumbnail",
+         description: "Featured image for articles",
+         hidden: ({ document }) => document?.contentType === "video",
          options: {
             hotspot: true,
          },
