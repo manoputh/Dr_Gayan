@@ -7,7 +7,7 @@ import { FaPlay } from "react-icons/fa";
  * Premium Video Card Component
  *
  * Converts YouTube URLs to embeds with privacy protection and lazy loading.
- * Supports standard videos (16:9) and Shorts (9:16) with adaptive aspect ratios.
+ * Supports standard videos (16:9) with consistent aspect ratio.
  *
  * Features:
  * - Automatic URL detection (youtube.com/watch, youtu.be, youtube.com/shorts)
@@ -16,7 +16,7 @@ import { FaPlay } from "react-icons/fa";
  * - Smooth animations and premium dark aesthetic
  * - Responsive grid-friendly layout
  */
-export default function VideoCard({ video, featured = false }) {
+export default function VideoCard({ video }) {
    const [isLoaded, setIsLoaded] = useState(false);
 
    // Parse YouTube URL to extract video ID and detect format
@@ -49,18 +49,13 @@ export default function VideoCard({ video, featured = false }) {
 
    const { videoId, isShort } = videoData;
    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-   const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`;
+   const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
 
-   // Determine aspect ratio class
-   const aspectRatioClass = isShort
-      ? "aspect-[9/16]" // Vertical for Shorts
-      : "aspect-video"; // 16:9 for standard videos
-
-   // Featured cards get larger treatment
-   const cardSizeClass = featured ? "lg:col-span-2 lg:row-span-2" : "";
+   // Use consistent 16:9 aspect ratio for professional look
+   const aspectRatioClass = "aspect-video"; // Consistent for all video types
 
    return (
-      <div className={`group ${cardSizeClass}`}>
+      <div className="group h-full">
          <div className="bg-charcoal rounded-sm border border-slate/20 overflow-hidden hover:border-electric/40 transition-all duration-500 h-full flex flex-col">
             {/* Video Embed / Thumbnail */}
             <div className={`relative ${aspectRatioClass} w-full overflow-hidden bg-obsidian`}>
@@ -93,13 +88,6 @@ export default function VideoCard({ video, featured = false }) {
                            {video.videoDuration}
                         </div>
                      )}
-
-                     {/* Shorts indicator */}
-                     {isShort && (
-                        <div className="absolute top-4 right-4 px-2 py-1 bg-electric/90 backdrop-blur-sm rounded-sm text-xs text-white font-medium uppercase tracking-wide">
-                           Short
-                        </div>
-                     )}
                   </button>
                ) : (
                   // Lazy-loaded iframe
@@ -119,11 +107,6 @@ export default function VideoCard({ video, featured = false }) {
                <h3 className="text-lg font-semibold text-white mb-2 line-clamp-2 group-hover:text-platinum transition-colors leading-tight">
                   {video.title}
                </h3>
-
-               {/* Description */}
-               {video.excerpt && (
-                  <p className="text-sm text-platinum/60 line-clamp-2 leading-relaxed mb-4 flex-1">{video.excerpt}</p>
-               )}
 
                {/* Metadata footer */}
                <div className="flex items-center justify-between text-xs text-steel pt-4 border-t border-slate/10">

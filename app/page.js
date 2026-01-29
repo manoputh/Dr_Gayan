@@ -5,6 +5,7 @@ import Button from "@/components/Button";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceCard from "@/components/ServiceCard";
 import BlogCard from "@/components/BlogCard";
+import VideoCard from "@/components/VideoCard";
 import Image from "next/image";
 
 export default async function HomePage() {
@@ -50,9 +51,19 @@ export default async function HomePage() {
 
                         {/* Strategic descriptors */}
                         <div className="flex flex-wrap gap-4 text-sm text-steel">
-                           <span className="px-4 py-2 bg-charcoal rounded-full">Fortune 500 Advisory</span>
-                           <span className="px-4 py-2 bg-charcoal rounded-full">ML Infrastructure</span>
-                           <span className="px-4 py-2 bg-charcoal rounded-full">AI Strategy</span>
+                           {hero?.expertiseTags && hero.expertiseTags.length > 0 ? (
+                              hero.expertiseTags.map((tag, idx) => (
+                                 <span key={idx} className="px-4 py-2 bg-charcoal rounded-full">
+                                    {tag}
+                                 </span>
+                              ))
+                           ) : (
+                              <>
+                                 <span className="px-4 py-2 bg-charcoal rounded-full">Fortune 500 Advisory</span>
+                                 <span className="px-4 py-2 bg-charcoal rounded-full">ML Infrastructure</span>
+                                 <span className="px-4 py-2 bg-charcoal rounded-full">AI Strategy</span>
+                              </>
+                           )}
                         </div>
 
                         {/* CTA Buttons - Primary focus */}
@@ -79,7 +90,7 @@ export default async function HomePage() {
                                     src={urlFor(hero.portraitImage).width(800).height(1067).url()}
                                     alt={hero.headline || "Dr. Gayan De Silva"}
                                     fill
-                                    className="object-cover"
+                                    className="object-cover filter grayscale"
                                     priority
                                  />
                               ) : (
@@ -182,7 +193,12 @@ export default async function HomePage() {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                      {blogPosts.slice(0, 2).map((post, index) => (
                         <div key={post._id} className="animate-fade-in" style={{ animationDelay: `${index * 200}ms` }}>
-                           <BlogCard post={post} />
+                           {/* Display video card if contentType is 'video', otherwise display blog card */}
+                           {post.contentType === "video" && post.youtubeUrl ? (
+                              <VideoCard video={post} />
+                           ) : (
+                              <BlogCard post={post} />
+                           )}
                         </div>
                      ))}
                   </div>
