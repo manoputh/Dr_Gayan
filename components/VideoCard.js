@@ -56,7 +56,7 @@ export default function VideoCard({ video }) {
 
    return (
       <div className="group h-full">
-         <div className="bg-charcoal rounded-sm border border-slate/20 overflow-hidden hover:border-electric/40 transition-all duration-500 h-full flex flex-col">
+         <div className="bg-charcoal rounded-sm border border-slate/20 overflow-hidden hover:border-electric/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-electric/10 h-full flex flex-col">
             {/* Video Embed / Thumbnail */}
             <div className={`relative ${aspectRatioClass} w-full overflow-hidden bg-obsidian`}>
                {!isLoaded ? (

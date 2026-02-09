@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { FaHome, FaBriefcase, FaLightbulb, FaEnvelope, FaBars, FaTimes } from "react-icons/fa";
+import { FaHome, FaBriefcase, FaLightbulb, FaEnvelope, FaBars, FaTimes, FaUser, FaFlask } from "react-icons/fa";
 
 export default function Navbar() {
    const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,9 @@ export default function Navbar() {
    // Simplified navigation - Enterprise focused
    const navLinks = [
       { name: "Home", href: "/", icon: FaHome },
+      { name: "About", href: "/about", icon: FaUser },
       { name: "Consulting", href: "/consulting", icon: FaBriefcase },
+      { name: "Think Like a Scientist", href: "/programs/think-like-a-scientist", icon: FaFlask },
       { name: "Insights", href: "/insights", icon: FaLightbulb },
       { name: "Contact", href: "/contact", icon: FaEnvelope },
    ];

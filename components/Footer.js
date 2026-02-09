@@ -43,9 +43,23 @@ export default function Footer({ socialLinks = [] }) {
                      </li>
                      <li>
                         <Link
+                           href="/about"
+                           className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
+                           About
+                        </Link>
+                     </li>
+                     <li>
+                        <Link
                            href="/consulting"
                            className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
                            AI/ML Consulting
+                        </Link>
+                     </li>
+                     <li>
+                        <Link
+                           href="/programs/think-like-a-scientist"
+                           className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
+                           Think Like a Scientist
                         </Link>
                      </li>
                      <li>
