@@ -61,7 +61,7 @@ export default function ConsultingForm() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 bg-dark-tertiary border border-graphite/30 rounded-md text-white focus:outline-none focus:border-electric-blue transition-colors"
+                        className="w-full px-4 py-3 bg-dark-tertiary border border-graphite/30 rounded-md text-black focus:outline-none focus:border-electric-blue transition-colors"
                         placeholder="John Doe"
                      />
                   </div>
@@ -78,7 +78,7 @@ export default function ConsultingForm() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 bg-dark-tertiary border border-graphite/30 rounded-md text-white focus:outline-none focus:border-electric-blue transition-colors"
+                        className="w-full px-4 py-3 bg-dark-tertiary border border-graphite/30 rounded-md text-black focus:outline-none focus:border-electric-blue transition-colors"
                         placeholder="john@company.com"
                      />
                   </div>
@@ -95,7 +95,7 @@ export default function ConsultingForm() {
                         value={formData.company}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 bg-dark-tertiary border border-graphite/30 rounded-md text-white focus:outline-none focus:border-electric-blue transition-colors"
+                        className="w-full px-4 py-3 bg-dark-tertiary border border-graphite/30 rounded-md text-black focus:outline-none focus:border-electric-blue transition-colors"
                         placeholder="Your Company Inc."
                      />
                   </div>
@@ -110,7 +110,7 @@ export default function ConsultingForm() {
                         name="role"
                         value={formData.role}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 bg-dark-tertiary border border-graphite/30 rounded-md text-white focus:outline-none focus:border-electric-blue transition-colors">
+                        className="w-full px-4 py-3 bg-dark-tertiary border border-graphite/30 rounded-md text-black focus:outline-none focus:border-electric-blue transition-colors">
                         <option value="">Select your role</option>
                         <option value="ceo">CEO / Founder</option>
                         <option value="cto">CTO / VP Engineering</option>
@@ -132,7 +132,7 @@ export default function ConsultingForm() {
                         onChange={handleChange}
                         required
                         rows="6"
-                        className="w-full px-4 py-3 bg-dark-tertiary border border-graphite/30 rounded-md text-white focus:outline-none focus:border-electric-blue transition-colors resize-none"
+                        className="w-full px-4 py-3 bg-dark-tertiary border border-graphite/30 rounded-md text-black focus:outline-none focus:border-electric-blue transition-colors resize-none"
                         placeholder="Describe your AI/ML needs, challenges, and goals..."></textarea>
                   </div>
 

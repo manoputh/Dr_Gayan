@@ -45,7 +45,7 @@ export default async function InsightsPage() {
                   <div className="flex items-center justify-between mb-8">
                      <div className="flex items-center space-x-3">
                         <FaPlayCircle className="w-5 h-5 text-electric" />
-                        <h2 className="text-2xl font-serif font-semibold text-white">Video Insights</h2>
+                        <h2 className="text-2xl font-serif font-semibold text-white">Talks</h2>
                      </div>
                      <span className="text-sm text-steel">{videos.length} videos</span>
                   </div>

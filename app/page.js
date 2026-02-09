@@ -40,7 +40,7 @@ export default async function HomePage() {
                         </div>
 
                         {/* Main headline - Serif, bold, declarative */}
-                        <h1 className="text-5xl lg:text-6xl xl:text-7xl font-serif font-bold text-white leading-tight">
+                        <h1 className="text-5xl lg:text-6xl xl:text-5xl font-serif font-bold text-white leading-tight">
                            {hero?.headline || "Dr. Gayan De Silva"}
                         </h1>
 
@@ -50,7 +50,7 @@ export default async function HomePage() {
                         </p>
 
                         {/* Strategic descriptors */}
-                        <div className="flex flex-wrap gap-4 text-sm text-steel">
+                        <div className="flex flex-wrap gap-4 text-sm text-steel font-bold">
                            {hero?.expertiseTags && hero.expertiseTags.length > 0 ? (
                               hero.expertiseTags.map((tag, idx) => (
                                  <span key={idx} className="px-4 py-2 bg-charcoal rounded-full">

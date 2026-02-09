@@ -38,7 +38,7 @@ export default async function ContactPage() {
                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                   {/* Email Card */}
                   {siteSettings?.email && (
-                     <div className="bg-dark-secondary p-8 rounded-lg border border-graphite/30 hover:border-electric-blue/50 transition-all">
+                     <div className="flex flex-col items-center bg-dark-secondary p-8 rounded-lg border border-graphite hover:border-electric-blue/50 transition-all">
                         <div className="flex items-center gap-4 mb-4">
                            <div className="w-12 h-12 bg-electric-blue/10 rounded-full flex items-center justify-center">
                               <FaEnvelope className="text-electric-blue text-xl" />
@@ -55,7 +55,7 @@ export default async function ContactPage() {
 
                   {/* Phone Card */}
                   {siteSettings?.phone && (
-                     <div className="bg-dark-secondary p-8 rounded-lg border border-graphite/30 hover:border-electric-blue/50 transition-all">
+                     <div className="flex flex-col items-center bg-dark-secondary p-8 rounded-lg border border-graphite hover:border-electric-blue/50 transition-all">
                         <div className="flex items-center gap-4 mb-4">
                            <div className="w-12 h-12 bg-electric-blue/10 rounded-full flex items-center justify-center">
                               <FaPhone className="text-electric-blue text-xl" />
@@ -73,7 +73,7 @@ export default async function ContactPage() {
 
                {/* Social Links */}
                {siteSettings?.socialLinks && siteSettings.socialLinks.length > 0 && (
-                  <div className="bg-dark-secondary p-8 rounded-lg border border-graphite/30 mb-12">
+                  <div className="bg-dark-secondary p-8 rounded-lg border border-graphite mb-12">
                      <h3 className="text-2xl font-bold text-white mb-6 text-center">Connect With Us</h3>
                      <div className="flex justify-center gap-6">
                         {siteSettings.socialLinks.map((link) => {
