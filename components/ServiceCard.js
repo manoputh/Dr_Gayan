@@ -20,25 +20,27 @@ export default function ServiceCard({ service }) {
    const Icon = iconMap[service.icon] || FaBrain;
 
    return (
-      <div className="bg-dark-secondary p-8 rounded-lg border border-graphite/30 hover:border-electric-blue/50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-electric-blue/20">
+      <div className="group bg-charcoal p-8 rounded-lg border border-slate/20 card-interactive hover:border-electric/40">
          {/* Icon */}
-         <div className="w-16 h-16 bg-gradient-to-br from-electric-blue to-blue-600 rounded-lg flex items-center justify-center mb-6">
-            <Icon className="text-white text-3xl" />
+         <div className="w-16 h-16 bg-gradient-to-br from-electric/20 to-electric/10 rounded-lg flex items-center justify-center mb-6 transition-colors duration-300 group-hover:from-electric/30 group-hover:to-electric/20">
+            <Icon className="text-electric text-2xl" />
          </div>
 
          {/* Title */}
-         <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
+         <h3 className="text-xl font-semibold text-white mb-4 transition-colors duration-300 group-hover:text-platinum">
+            {service.title}
+         </h3>
 
          {/* Description */}
-         <p className="text-gray-400 mb-6">{service.description}</p>
+         <p className="text-steel mb-6 leading-relaxed">{service.description}</p>
 
          {/* Features */}
          {service.features && service.features.length > 0 && (
             <ul className="space-y-2">
                {service.features.map((feature, index) => (
                   <li key={index} className="flex items-start">
-                     <span className="text-electric-blue mr-2">✓</span>
-                     <span className="text-gray-300 text-sm">{feature}</span>
+                     <span className="text-electric mr-2">✓</span>
+                     <span className="text-platinum/70 text-sm">{feature}</span>
                   </li>
                ))}
             </ul>

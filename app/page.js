@@ -6,6 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 import ServiceCard from "@/components/ServiceCard";
 import BlogCard from "@/components/BlogCard";
 import VideoCard from "@/components/VideoCard";
+import AnimatedSection from "@/components/AnimatedSection";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -29,37 +30,39 @@ export default async function HomePage() {
             </div>
 
             <Container className="relative z-10">
-               <div className="max-w-4xl mx-auto text-center space-y-8">
-                  {/* Small eyebrow text */}
-                  <div className="flex items-center justify-center space-x-3">
-                     <div className="h-[1px] w-12 bg-gold"></div>
-                     <span className="text-sm tracking-widest uppercase text-steel font-medium">
-                        Strategic AI/ML Leadership
-                     </span>
-                     <div className="h-[1px] w-12 bg-gold"></div>
+               <AnimatedSection from="none">
+                  <div className="max-w-4xl mx-auto text-center space-y-8">
+                     {/* Small eyebrow text */}
+                     <div className="flex items-center justify-center space-x-3">
+                        <div className="h-[1px] w-12 bg-gold"></div>
+                        <span className="text-sm tracking-widest uppercase text-steel font-medium">
+                           Strategic AI/ML Leadership
+                        </span>
+                        <div className="h-[1px] w-12 bg-gold"></div>
+                     </div>
+
+                     {/* Main headline */}
+                     <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white leading-tight">
+                        {hero?.headline || "Transforming Vision into Intelligence"}
+                     </h1>
+
+                     {/* Subheadline */}
+                     <p className="text-xl lg:text-2xl text-platinum/80 leading-relaxed max-w-3xl mx-auto">
+                        {hero?.subheadline ||
+                           "Empowering enterprises with strategic AI/ML solutions that drive measurable outcomes and sustainable growth."}
+                     </p>
+
+                     {/* CTA Buttons */}
+                     <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+                        <Button href={hero?.ctaLink || "/consulting"} variant="primary">
+                           {hero?.ctaText || "Book Consultation"}
+                        </Button>
+                        <Button href="/about" variant="secondary">
+                           Learn More About Us
+                        </Button>
+                     </div>
                   </div>
-
-                  {/* Main headline */}
-                  <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white leading-tight">
-                     {hero?.headline || "Transforming Vision into Intelligence"}
-                  </h1>
-
-                  {/* Subheadline */}
-                  <p className="text-xl lg:text-2xl text-platinum/80 leading-relaxed max-w-3xl mx-auto">
-                     {hero?.subheadline ||
-                        "Empowering enterprises with strategic AI/ML solutions that drive measurable outcomes and sustainable growth."}
-                  </p>
-
-                  {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-                     <Button href={hero?.ctaLink || "/consulting"} variant="primary">
-                        {hero?.ctaText || "Book Consultation"}
-                     </Button>
-                     <Button href="/about" variant="secondary">
-                        Learn More About Us
-                     </Button>
-                  </div>
-               </div>
+               </AnimatedSection>
             </Container>
          </section>
 
@@ -69,34 +72,36 @@ export default async function HomePage() {
                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
 
                <Container>
-                  <div className="grid lg:grid-cols-2 gap-12 items-center">
-                     <div className="space-y-6">
-                        <div className="inline-block px-4 py-1 bg-electric/10 border border-electric/30 rounded-full">
-                           <span className="text-xs font-semibold tracking-wider uppercase text-electric">
-                              Featured Program
-                           </span>
+                  <AnimatedSection>
+                     <div className="grid lg:grid-cols-2 gap-12 items-center">
+                        <div className="space-y-6">
+                           <div className="inline-block px-4 py-1 bg-electric/10 border border-electric/30 rounded-full">
+                              <span className="text-xs font-semibold tracking-wider uppercase text-electric">
+                                 Featured Program
+                              </span>
+                           </div>
+                           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white leading-tight">
+                              {featuredProgram.title}
+                           </h2>
+                           <p className="text-lg text-platinum/80 leading-relaxed">{featuredProgram.description}</p>
+                           <div className="pt-4">
+                              <Button href="/programs/think-like-a-scientist" variant="primary">
+                                 Explore Program
+                              </Button>
+                           </div>
                         </div>
-                        <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white leading-tight">
-                           {featuredProgram.title}
-                        </h2>
-                        <p className="text-lg text-platinum/80 leading-relaxed">{featuredProgram.description}</p>
-                        <div className="pt-4">
-                           <Button href="/programs/think-like-a-scientist" variant="primary">
-                              Explore Program
-                           </Button>
-                        </div>
-                     </div>
 
-                     {featuredProgram.heroImage && (
-                        <div className="relative aspect-video lg:aspect-square rounded-lg overflow-hidden border border-slate/20">
-                           <img
-                              src={urlFor(featuredProgram.heroImage).width(800).height(800).url()}
-                              alt={featuredProgram.heroImage.alt || featuredProgram.title}
-                              className="w-full h-full object-cover"
-                           />
-                        </div>
-                     )}
-                  </div>
+                        {featuredProgram.heroImage && (
+                           <div className="relative aspect-video lg:aspect-square rounded-lg overflow-hidden border border-slate/20">
+                              <img
+                                 src={urlFor(featuredProgram.heroImage).width(800).height(800).url()}
+                                 alt={featuredProgram.heroImage.alt || featuredProgram.title}
+                                 className="w-full h-full object-cover"
+                              />
+                           </div>
+                        )}
+                     </div>
+                  </AnimatedSection>
                </Container>
             </section>
          )}
@@ -106,29 +111,28 @@ export default async function HomePage() {
             <section className="relative py-32 bg-obsidian">
                <Container>
                   {/* Section intro */}
-                  <div className="max-w-3xl mx-auto text-center mb-20">
-                     <div className="flex items-center justify-center space-x-3 mb-6">
-                        <div className="h-[1px] w-12 bg-gold"></div>
-                        <span className="text-sm tracking-widest uppercase text-steel font-medium">Services</span>
-                        <div className="h-[1px] w-12 bg-gold"></div>
+                  <AnimatedSection>
+                     <div className="max-w-3xl mx-auto text-center mb-20">
+                        <div className="flex items-center justify-center space-x-3 mb-6">
+                           <div className="h-[1px] w-12 bg-gold"></div>
+                           <span className="text-sm tracking-widest uppercase text-steel font-medium">Services</span>
+                           <div className="h-[1px] w-12 bg-gold"></div>
+                        </div>
+                        <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
+                           Strategic AI/ML Consulting
+                        </h2>
+                        <p className="text-lg text-platinum/70 leading-relaxed">
+                           Comprehensive solutions tailored to your enterprise transformation goals
+                        </p>
                      </div>
-                     <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
-                        Strategic AI/ML Consulting
-                     </h2>
-                     <p className="text-lg text-platinum/70 leading-relaxed">
-                        Comprehensive solutions tailored to your enterprise transformation goals
-                     </p>
-                  </div>
+                  </AnimatedSection>
 
                   {/* Services grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                      {services.map((service, index) => (
-                        <div
-                           key={service._id}
-                           className="animate-slide-up"
-                           style={{ animationDelay: `${index * 100}ms` }}>
+                        <AnimatedSection key={service._id} delay={index * 100} from="bottom">
                            <ServiceCard service={service} />
-                        </div>
+                        </AnimatedSection>
                      ))}
                   </div>
 
@@ -158,32 +162,34 @@ export default async function HomePage() {
 
                <Container>
                   {/* Section intro */}
-                  <div className="max-w-3xl mx-auto text-center mb-20">
-                     <div className="flex items-center justify-center space-x-3 mb-6">
-                        <div className="h-[1px] w-12 bg-gold"></div>
-                        <span className="text-sm tracking-widest uppercase text-steel font-medium">
-                           Latest Insights
-                        </span>
-                        <div className="h-[1px] w-12 bg-gold"></div>
+                  <AnimatedSection>
+                     <div className="max-w-3xl mx-auto text-center mb-20">
+                        <div className="flex items-center justify-center space-x-3 mb-6">
+                           <div className="h-[1px] w-12 bg-gold"></div>
+                           <span className="text-sm tracking-widest uppercase text-steel font-medium">
+                              Latest Insights
+                           </span>
+                           <div className="h-[1px] w-12 bg-gold"></div>
+                        </div>
+                        <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
+                           Knowledge & Perspectives
+                        </h2>
+                        <p className="text-lg text-platinum/70 leading-relaxed">
+                           Strategic insights on AI/ML implementation, industry trends, and emerging technologies
+                        </p>
                      </div>
-                     <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">
-                        Knowledge & Perspectives
-                     </h2>
-                     <p className="text-lg text-platinum/70 leading-relaxed">
-                        Strategic insights on AI/ML implementation, industry trends, and emerging technologies
-                     </p>
-                  </div>
+                  </AnimatedSection>
 
                   {/* Content grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                      {blogPosts.slice(0, 3).map((post, index) => (
-                        <div key={post._id} className="animate-fade-in" style={{ animationDelay: `${index * 150}ms` }}>
+                        <AnimatedSection key={post._id} delay={index * 120} from="bottom">
                            {post.contentType === "video" && post.youtubeUrl ? (
                               <VideoCard video={post} />
                            ) : (
                               <BlogCard post={post} />
                            )}
-                        </div>
+                        </AnimatedSection>
                      ))}
                   </div>
 
@@ -209,25 +215,29 @@ export default async function HomePage() {
          {/* FINAL CTA SECTION */}
          <section className="relative py-32 bg-obsidian">
             <Container>
-               <div className="max-w-4xl mx-auto text-center space-y-8">
-                  <div className="inline-block px-4 py-1 bg-electric/10 border border-electric/30 rounded-full mb-4">
-                     <span className="text-xs font-semibold tracking-wider uppercase text-electric">Get Started</span>
+               <AnimatedSection from="none">
+                  <div className="max-w-4xl mx-auto text-center space-y-8">
+                     <div className="inline-block px-4 py-1 bg-electric/10 border border-electric/30 rounded-full mb-4">
+                        <span className="text-xs font-semibold tracking-wider uppercase text-electric">
+                           Get Started
+                        </span>
+                     </div>
+                     <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white leading-tight">
+                        Ready to Transform Your Organization?
+                     </h2>
+                     <p className="text-xl text-platinum/70 max-w-2xl mx-auto leading-relaxed">
+                        Partner with us to unlock the full potential of AI/ML for your enterprise
+                     </p>
+                     <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+                        <Button href="/contact" variant="primary">
+                           Schedule Consultation
+                        </Button>
+                        <Button href="/about" variant="secondary">
+                           Learn About Our Team
+                        </Button>
+                     </div>
                   </div>
-                  <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white leading-tight">
-                     Ready to Transform Your Organization?
-                  </h2>
-                  <p className="text-xl text-platinum/70 max-w-2xl mx-auto leading-relaxed">
-                     Partner with us to unlock the full potential of AI/ML for your enterprise
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-                     <Button href="/contact" variant="primary">
-                        Schedule Consultation
-                     </Button>
-                     <Button href="/about" variant="secondary">
-                        Learn About Our Team
-                     </Button>
-                  </div>
-               </div>
+               </AnimatedSection>
             </Container>
          </section>
       </>

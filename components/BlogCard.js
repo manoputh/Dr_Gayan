@@ -23,7 +23,7 @@ export default function BlogCard({ post }) {
 
    return (
       <Link href={`/insights/${post.slug.current}`} className="group block h-full">
-         <div className="bg-charcoal rounded-sm border border-slate/20 overflow-hidden hover:border-slate/40 transition-all duration-500 h-full flex flex-col">
+         <div className="bg-charcoal rounded-sm border border-slate/20 overflow-hidden card-interactive hover:border-slate/40 h-full flex flex-col">
             {/* Image */}
             {thumbnailUrl && (
                <div className="relative aspect-video w-full overflow-hidden bg-graphite">

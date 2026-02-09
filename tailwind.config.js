@@ -21,10 +21,11 @@ module.exports = {
             mono: ["JetBrains Mono", "Courier New", "monospace"], // Technical elements
          },
          animation: {
-            "fade-in": "fadeIn 1.2s ease-out", // Slower, more luxurious
-            "slide-up": "slideUp 1s ease-out", // Gentle entrance
-            reveal: "reveal 1.4s ease-out", // Elegant reveal
-            shimmer: "shimmer 3s ease-in-out infinite", // Subtle prestige effect
+            "fade-in": "fadeIn 1.2s ease-out",
+            "slide-up": "slideUp 1s ease-out",
+            reveal: "reveal 1.4s ease-out",
+            shimmer: "shimmer 2s ease-in-out infinite",
+            "glow-pulse": "glowPulse 3s ease-in-out infinite",
          },
          keyframes: {
             fadeIn: {
@@ -40,9 +41,19 @@ module.exports = {
                "100%": { transform: "translateY(0)", opacity: "1" },
             },
             shimmer: {
-               "0%, 100%": { opacity: "0.5" },
-               "50%": { opacity: "0.8" },
+               "0%": { backgroundPosition: "200% 0" },
+               "100%": { backgroundPosition: "-200% 0" },
             },
+            glowPulse: {
+               "0%, 100%": { boxShadow: "0 0 8px 0 rgba(59,130,246,0.15)" },
+               "50%": { boxShadow: "0 0 20px 4px rgba(59,130,246,0.25)" },
+            },
+         },
+         boxShadow: {
+            card: "0 2px 8px 0 rgba(0,0,0,0.2)",
+            "card-hover": "0 8px 24px -4px rgba(59,130,246,0.12), 0 4px 12px -2px rgba(0,0,0,0.3)",
+            "glow-sm": "0 0 12px 2px rgba(59,130,246,0.15)",
+            "glow-md": "0 0 24px 4px rgba(59,130,246,0.2)",
          },
          letterSpacing: {
             "ultra-wide": "0.2em",

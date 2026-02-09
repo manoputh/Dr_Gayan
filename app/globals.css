@@ -77,3 +77,64 @@ body {
    -webkit-box-orient: vertical;
    overflow: hidden;
 }
+
+/* ── Card interaction utilities ────────────────────────── */
+.card-interactive {
+   transition:
+      transform 0.3s ease-out,
+      box-shadow 0.3s ease-out,
+      border-color 0.3s ease-out;
+}
+.card-interactive:hover {
+   transform: translateY(-3px);
+   box-shadow:
+      0 8px 24px -4px rgba(59, 130, 246, 0.1),
+      0 4px 12px -2px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Skeleton shimmer effect ───────────────────────────── */
+.skeleton-shimmer {
+   background: linear-gradient(90deg, rgba(58, 58, 58, 0.2) 0%, rgba(58, 58, 58, 0.4) 50%, rgba(58, 58, 58, 0.2) 100%);
+   background-size: 200% 100%;
+   animation: shimmerSlide 1.8s ease-in-out infinite;
+}
+@keyframes shimmerSlide {
+   0% {
+      background-position: 200% 0;
+   }
+   100% {
+      background-position: -200% 0;
+   }
+}
+
+/* ── CTA glow accent ──────────────────────────────────── */
+.cta-glow {
+   position: relative;
+}
+.cta-glow::after {
+   content: "";
+   position: absolute;
+   inset: -2px;
+   border-radius: inherit;
+   background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(201, 165, 91, 0.15));
+   opacity: 0;
+   transition: opacity 0.4s ease;
+   z-index: -1;
+   filter: blur(12px);
+}
+.cta-glow:hover::after {
+   opacity: 1;
+}
+
+/* ── Navbar active glow ───────────────────────────────── */
+.nav-active-glow {
+   box-shadow:
+      inset 3px 0 0 #3b82f6,
+      0 0 12px -4px rgba(59, 130, 246, 0.3);
+}
+
+/* ── Smooth focus ring for accessibility ──────────────── */
+.focus-ring:focus-visible {
+   outline: 2px solid rgba(59, 130, 246, 0.6);
+   outline-offset: 2px;
+}

@@ -3,6 +3,8 @@ import { servicesQuery } from "@/lib/queries";
 import Container from "@/components/Container";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceCard from "@/components/ServiceCard";
+import AnimatedSection from "@/components/AnimatedSection";
+import EmptyState from "@/components/EmptyState";
 import ConsultingForm from "./ConsultingForm";
 
 export const metadata = {
@@ -21,16 +23,20 @@ export default async function ConsultingPage() {
       <div className="py-20">
          <Container>
             {/* Page Header */}
-            <SectionHeading
-               title="AI/ML Consulting Services"
-               subtitle="Strategic consulting and implementation services designed for enterprise clients"
-            />
+            <AnimatedSection from="none">
+               <SectionHeading
+                  title="AI/ML Consulting Services"
+                  subtitle="Strategic consulting and implementation services designed for enterprise clients"
+               />
+            </AnimatedSection>
 
             {/* Services Grid */}
             {services.length > 0 ? (
                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-                  {services.map((service) => (
-                     <ServiceCard key={service._id} service={service} />
+                  {services.map((service, index) => (
+                     <AnimatedSection key={service._id} delay={index * 100} from="bottom">
+                        <ServiceCard service={service} />
+                     </AnimatedSection>
                   ))}
                </div>
             ) : (
@@ -85,26 +91,30 @@ export default async function ConsultingPage() {
             )}
 
             {/* Why Choose Us Section */}
-            <div className="bg-dark-secondary p-8 md:p-12 rounded-lg border border-graphite/30 mb-20">
-               <h2 className="text-3xl font-bold mb-8 text-center">Why Choose Us</h2>
-               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div className="text-center">
-                     <div className="text-4xl font-bold text-electric-blue mb-2">10+</div>
-                     <p className="text-gray-300">Years Experience</p>
-                  </div>
-                  <div className="text-center">
-                     <div className="text-4xl font-bold text-electric-blue mb-2">100+</div>
-                     <p className="text-gray-300">Enterprise Clients</p>
-                  </div>
-                  <div className="text-center">
-                     <div className="text-4xl font-bold text-electric-blue mb-2">500+</div>
-                     <p className="text-gray-300">Projects Delivered</p>
+            <AnimatedSection>
+               <div className="bg-charcoal p-8 md:p-12 rounded-lg border border-slate/20 mb-20">
+                  <h2 className="text-3xl font-serif font-bold mb-8 text-center text-white">Why Choose Us</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                     <div className="text-center">
+                        <div className="text-4xl font-bold text-electric mb-2">10+</div>
+                        <p className="text-platinum/70">Years Experience</p>
+                     </div>
+                     <div className="text-center">
+                        <div className="text-4xl font-bold text-electric mb-2">100+</div>
+                        <p className="text-platinum/70">Enterprise Clients</p>
+                     </div>
+                     <div className="text-center">
+                        <div className="text-4xl font-bold text-electric mb-2">500+</div>
+                        <p className="text-platinum/70">Projects Delivered</p>
+                     </div>
                   </div>
                </div>
-            </div>
+            </AnimatedSection>
 
             {/* Consultation Form */}
-            <ConsultingForm />
+            <AnimatedSection>
+               <ConsultingForm />
+            </AnimatedSection>
          </Container>
       </div>
    );

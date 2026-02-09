@@ -35,7 +35,7 @@ export default async function AboutPage() {
 
                      {/* Name + Title + Philosophy */}
                      <div className={about?.portrait ? "md:col-span-8" : "md:col-span-12 text-center"}>
-                        <h1 className="text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-electric to-gold bg-clip-text text-transparent">
+                        <h1 className="text-4xl md:text-5xl font-serif font-bold mb-3 bg-gradient-to-r from-white via-platinum to-white bg-clip-text text-transparent">
                            {about?.name || "Dr. Gayan De Silva"}
                         </h1>
                         <p className="text-lg text-steel mb-6">
@@ -84,7 +84,9 @@ export default async function AboutPage() {
                <div className="max-w-5xl mx-auto mb-20 grid grid-cols-1 md:grid-cols-2 gap-8">
                   {/* Industry Experience */}
                   <div>
-                     <h2 className="text-2xl font-bold text-white mb-6 tracking-tight">Industry Experience</h2>
+                     <h2 className="text-2xl font-serif font-bold text-white mb-6 tracking-tight">
+                        Industry Experience
+                     </h2>
                      <div className="space-y-4">
                         {about?.industryExperience?.length ? (
                            about.industryExperience.map((item, i) => (
@@ -119,7 +121,9 @@ export default async function AboutPage() {
 
                   {/* Areas of Expertise */}
                   <div>
-                     <h2 className="text-2xl font-bold text-white mb-6 tracking-tight">Areas of Expertise</h2>
+                     <h2 className="text-2xl font-serif font-bold text-white mb-6 tracking-tight">
+                        Areas of Expertise
+                     </h2>
                      <div className="flex flex-wrap gap-3">
                         {(about?.expertise?.length
                            ? about.expertise
@@ -146,7 +150,7 @@ export default async function AboutPage() {
             {/* ── CTA ──────────────────────────────────────────── */}
             <AnimatedSection delay={300}>
                <div className="max-w-3xl mx-auto text-center bg-gradient-to-r from-electric/5 to-gold/5 border border-slate/20 p-10 rounded-lg">
-                  <h3 className="text-2xl font-bold text-white mb-3">Let&apos;s Work Together</h3>
+                  <h3 className="text-2xl font-serif font-bold text-white mb-3">Let&apos;s Work Together</h3>
                   <p className="text-steel mb-6">Explore how strategic AI/ML leadership can accelerate your goals.</p>
                   <Button href={about?.ctaLink || "/contact"} variant="primary">
                      {about?.ctaText || "Schedule a Consultation"}

@@ -2,7 +2,7 @@ import { FaInbox, FaLightbulb, FaGraduationCap } from "react-icons/fa";
 
 /**
  * Empty State Component
- * Professional empty states for no content scenarios
+ * Professional empty states with subtle animation for no-content scenarios
  *
  * @param {string} type - Type of content: 'services', 'insights', 'courses', 'generic'
  * @param {string} title - Custom title (optional)
@@ -36,10 +36,10 @@ export default function EmptyState({ type = "generic", title, description }) {
    const Icon = config.icon;
 
    return (
-      <div className="bg-charcoal rounded-lg border border-slate/20 p-12 text-center">
+      <div className="bg-charcoal rounded-lg border border-slate/20 p-12 text-center animate-fade-in">
          <div className="max-w-md mx-auto space-y-4">
-            {/* Icon */}
-            <div className="w-16 h-16 mx-auto bg-slate/10 rounded-full flex items-center justify-center">
+            {/* Icon with subtle glow */}
+            <div className="w-16 h-16 mx-auto bg-slate/10 rounded-full flex items-center justify-center ring-1 ring-slate/20 shadow-glow-sm">
                <Icon className="w-8 h-8 text-steel" />
             </div>
 
@@ -48,6 +48,11 @@ export default function EmptyState({ type = "generic", title, description }) {
 
             {/* Description */}
             <p className="text-steel leading-relaxed">{description || config.description}</p>
+
+            {/* Decorative accent */}
+            <div className="pt-4">
+               <div className="h-[1px] w-16 mx-auto bg-gradient-to-r from-transparent via-electric/40 to-transparent"></div>
+            </div>
          </div>
       </div>
    );

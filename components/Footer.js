@@ -93,7 +93,7 @@ export default function Footer({ socialLinks = [] }) {
                                  target="_blank"
                                  rel="noopener noreferrer"
                                  aria-label={`Visit our ${link.platform}`}
-                                 className="w-10 h-10 flex items-center justify-center rounded-md bg-charcoal/50 hover:bg-charcoal border border-slate/20 hover:border-slate/40 text-steel hover:text-platinum transition-all duration-300">
+                                 className="w-10 h-10 flex items-center justify-center rounded-md bg-charcoal/50 hover:bg-charcoal border border-slate/20 hover:border-electric/30 text-steel hover:text-platinum transition-all duration-300 hover:-translate-y-0.5">
                                  <Icon size={18} />
                               </a>
                            ) : null;

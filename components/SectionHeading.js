@@ -1,6 +1,7 @@
 /**
  * Section Heading Component
  * Consistent styling for page section headings
+ * with subtle gradient accent bar
  *
  * @param {string} title - Main heading text
  * @param {string} subtitle - Optional subtitle text
@@ -15,10 +16,10 @@ export default function SectionHeading({ title, subtitle, align = "center" }) {
 
    return (
       <div className={`mb-12 ${alignmentClasses[align]}`}>
-         <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-electric-blue to-gold-accent bg-clip-text text-transparent">
+         <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4 bg-gradient-to-r from-white via-platinum to-white bg-clip-text text-transparent">
             {title}
          </h2>
-         {subtitle && <p className="text-gray-400 text-lg max-w-2xl mx-auto">{subtitle}</p>}
+         {subtitle && <p className="text-steel text-lg max-w-2xl mx-auto leading-relaxed">{subtitle}</p>}
       </div>
    );
 }

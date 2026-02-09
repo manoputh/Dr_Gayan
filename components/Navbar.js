@@ -58,16 +58,18 @@ export default function Navbar() {
                         className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 group
                            ${
                               active
-                                 ? "bg-electric/10 text-electric"
-                                 : "text-platinum hover:bg-slate/20 hover:text-white"
+                                 ? "bg-electric/10 text-electric nav-active-glow"
+                                 : "text-platinum hover:bg-slate/10 hover:text-white"
                            }`}>
-                        <Icon className="w-5 h-5 flex-shrink-0" />
+                        <Icon className="w-5 h-5 flex-shrink-0 transition-transform duration-200 group-hover:scale-110" />
                         {isSidebarExpanded && (
                            <span className="text-sm font-medium whitespace-nowrap overflow-hidden">{link.name}</span>
                         )}
 
                         {/* Active indicator */}
-                        {active && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-electric"></div>}
+                        {active && (
+                           <div className="ml-auto w-1.5 h-1.5 rounded-full bg-electric animate-glow-pulse"></div>
+                        )}
                      </Link>
                   );
                })}
@@ -109,7 +111,7 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {isOpen && (
-               <div className="bg-graphite border-t border-slate/20">
+               <div className="bg-graphite border-t border-slate/20 animate-fade-in">
                   <div className="px-4 py-4 space-y-2">
                      {navLinks.map((link) => {
                         const Icon = link.icon;
@@ -120,11 +122,11 @@ export default function Navbar() {
                               key={link.name}
                               href={link.href}
                               onClick={() => setIsOpen(false)}
-                              className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors
+                              className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200
                                  ${
                                     active
-                                       ? "bg-electric/10 text-electric"
-                                       : "text-platinum hover:bg-slate/20 hover:text-white"
+                                       ? "bg-electric/10 text-electric nav-active-glow"
+                                       : "text-platinum hover:bg-slate/10 hover:text-white"
                                  }`}>
                               <Icon className="w-5 h-5" />
                               <span className="text-sm font-medium">{link.name}</span>
