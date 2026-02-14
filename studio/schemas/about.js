@@ -78,18 +78,6 @@ export default {
          description: "A short statement about your approach to work and consulting.",
          rows: 4,
       },
-      {
-         name: "ctaText",
-         title: "CTA Button Text",
-         type: "string",
-         initialValue: "Schedule a Consultation",
-      },
-      {
-         name: "ctaLink",
-         title: "CTA Button Link",
-         type: "string",
-         initialValue: "/contact",
-      },
    ],
    preview: {
       select: { title: "name", subtitle: "title" },

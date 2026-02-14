@@ -1,11 +1,9 @@
-import { sanityFetch, urlFor } from "@/lib/sanity";
+import { sanityFetch } from "@/lib/sanity";
 import { programBySlugQuery } from "@/lib/queries";
 import { PortableText } from "@portabletext/react";
-import { notFound } from "next/navigation";
 import Container from "@/components/Container";
 import AnimatedSection from "@/components/AnimatedSection";
 import Button from "@/components/Button";
-import Link from "next/link";
 
 export const metadata = {
    title: "Think Like a Scientist | Dr. Gayan De Silva",
@@ -40,7 +38,6 @@ export default async function ThinkLikeAScientistPage() {
            "Communicate complex ideas clearly",
            "Apply scientific methodology to business challenges",
         ];
-   const courses = program?.courses || [];
    const enrollmentEnabled = program?.enrollmentEnabled ?? false;
    const ctaText = program?.ctaText || "Enroll Now";
    const status = program?.status || "upcoming";
@@ -111,67 +108,6 @@ export default async function ThinkLikeAScientistPage() {
                         ))}
                      </ul>
                   </div>
-               </div>
-            </AnimatedSection>
-
-            {/* ── Courses Under This Program ───────────────────── */}
-            <AnimatedSection delay={300}>
-               <div className="max-w-5xl mx-auto mb-20">
-                  <h2 className="text-3xl font-serif font-bold text-white mb-8 tracking-tight">
-                     Courses{courses.length > 0 ? ` (${courses.length})` : ""}
-                  </h2>
-
-                  {courses.length > 0 ? (
-                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {courses.map((course) => (
-                           <div
-                              key={course._id}
-                              className="bg-charcoal rounded-lg border border-slate/20 overflow-hidden card-interactive hover:border-electric/30">
-                              {/* Course image */}
-                              {course.image && (
-                                 <div className="h-40 overflow-hidden">
-                                    <img
-                                       src={urlFor(course.image).width(600).height(300).url()}
-                                       alt={course.image.alt || course.title}
-                                       className="w-full h-full object-cover"
-                                    />
-                                 </div>
-                              )}
-
-                              <div className="p-6">
-                                 <div className="flex items-center gap-3 mb-3">
-                                    {course.level && (
-                                       <span className="text-xs font-medium px-2 py-0.5 bg-electric/10 text-electric rounded">
-                                          {course.level}
-                                       </span>
-                                    )}
-                                    {course.duration && <span className="text-xs text-steel">{course.duration}</span>}
-                                 </div>
-
-                                 <h3 className="text-lg font-bold text-white mb-2">{course.title}</h3>
-                                 <p className="text-sm text-steel leading-relaxed mb-4">{course.description}</p>
-
-                                 <div className="flex items-center justify-between">
-                                    <span className="text-sm font-semibold text-gold">
-                                       {course.price ? `$${course.price}` : "Free"}
-                                    </span>
-                                    {course.enrollmentEnabled && course.slug?.current && (
-                                       <Link
-                                          href={`/courses/${course.slug.current}`}
-                                          className="text-sm text-electric hover:text-electric-muted transition-colors font-medium">
-                                          Learn More &rarr;
-                                       </Link>
-                                    )}
-                                 </div>
-                              </div>
-                           </div>
-                        ))}
-                     </div>
-                  ) : (
-                     <div className="bg-charcoal rounded-lg border border-slate/20 p-10 text-center">
-                        <p className="text-steel">Courses will be announced soon. Stay tuned!</p>
-                     </div>
-                  )}
                </div>
             </AnimatedSection>
 

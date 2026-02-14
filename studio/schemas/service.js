@@ -16,13 +16,7 @@ export default {
          description: "Brief description of the service",
          validation: (Rule) => Rule.required().max(500),
       },
-      {
-         name: "icon",
-         title: "Icon Name",
-         type: "string",
-         description: "React Icons name (e.g., FaBrain, FaChartLine, FaRobot)",
-         initialValue: "FaBrain",
-      },
+
       {
          name: "features",
          title: "Key Features",

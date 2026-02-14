@@ -25,32 +25,7 @@ export default {
          of: [{ type: "string" }],
          validation: (Rule) => Rule.max(5),
       },
-      {
-         name: "ctaText",
-         title: "Primary CTA Button Text",
-         type: "string",
-         description: "Main call-to-action button text",
-         initialValue: "Book Consultation",
-      },
-      {
-         name: "ctaLink",
-         title: "Primary CTA Link",
-         type: "string",
-         description: "URL or path for primary CTA",
-         initialValue: "/consulting",
-      },
-      {
-         name: "secondaryCtaText",
-         title: "Secondary CTA Button Text",
-         type: "string",
-         initialValue: "Contact Us",
-      },
-      {
-         name: "secondaryCtaLink",
-         title: "Secondary CTA Link",
-         type: "string",
-         initialValue: "/contact",
-      },
+
       {
          name: "portraitImage",
          title: "Professional Portrait",
@@ -60,15 +35,6 @@ export default {
             hotspot: true,
          },
          validation: (Rule) => Rule.required(),
-      },
-      {
-         name: "backgroundImage",
-         title: "Background Image",
-         type: "image",
-         description: "Optional hero background image",
-         options: {
-            hotspot: true,
-         },
       },
    ],
 };
