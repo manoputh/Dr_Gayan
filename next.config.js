@@ -6,6 +6,7 @@ const nextConfig = {
          {
             protocol: "https",
             hostname: "cdn.sanity.io",
+            pathname: "/**",
          },
          {
             protocol: "https",
@@ -13,6 +14,8 @@ const nextConfig = {
          },
       ],
    },
+   // Netlify handles routing
+   trailingSlash: true,
 };
 
-module.exports = nextConfig;
+export default nextConfig;

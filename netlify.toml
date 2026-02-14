@@ -1,0 +1,20 @@
+[build]
+  publish = ".next"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_VERSION = "9"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Studio build (if deploying both together)
+[context.production]
+  command = "npm run build && cd studio && npm run build"
+
+# Environment specific builds
+[context.branch-deploy]
+  command = "npm run build"
