@@ -1,20 +1,25 @@
 [build]
-  publish = ".next"
   command = "npm run build"
+  publish = ".next"
 
 [build.environment]
   NODE_VERSION = "18"
-  NPM_VERSION = "9"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Handle dynamic routes
+[[redirects]]
+  from = "/courses/:slug"
+  to = "/courses/:slug"
+  status = 200
+
+[[redirects]]
+  from = "/blog/:slug"
+  to = "/blog/:slug"
+  status = 200
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-# Studio build (if deploying both together)
-[context.production]
-  command = "npm run build && cd studio && npm run build"
-
-# Environment specific builds
-[context.branch-deploy]
-  command = "npm run build"
