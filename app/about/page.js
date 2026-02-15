@@ -4,6 +4,7 @@ import { PortableText } from "@portabletext/react";
 import Container from "@/components/Container";
 import AnimatedSection from "@/components/AnimatedSection";
 import Button from "@/components/Button";
+import { portableTextComponents } from "@/components/PortableTextComponents";
 
 export const metadata = {
    title: "About | Dr. Gayan De Silva",
@@ -57,8 +58,8 @@ export default async function AboutPage() {
                <div className="max-w-4xl mx-auto mb-20">
                   <div className="bg-charcoal p-8 md:p-12 rounded-lg border border-slate/20 transition-all duration-300 hover:border-slate/30 hover:shadow-lg hover:shadow-electric/5">
                      {about?.bio ? (
-                        <div className="prose prose-invert prose-lg max-w-none prose-p:text-platinum/80 prose-headings:text-white">
-                           <PortableText value={about.bio} />
+                        <div className="text-lg">
+                           <PortableText value={about.bio} components={portableTextComponents} />
                         </div>
                      ) : (
                         <div className="text-lg text-platinum/80 leading-relaxed space-y-5">

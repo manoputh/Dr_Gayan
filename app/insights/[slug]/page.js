@@ -6,6 +6,7 @@ import { sanityFetch, urlFor } from "@/lib/sanity";
 import { singleBlogPostQuery } from "@/lib/queries";
 import Container from "@/components/Container";
 import Button from "@/components/Button";
+import { portableTextComponents } from "@/components/PortableTextComponents";
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }) {
@@ -45,54 +46,6 @@ export default async function BlogPostPage({ params }) {
          month: "long",
          day: "numeric",
       });
-   };
-
-   // Portable Text components for rich text rendering
-   const portableTextComponents = {
-      block: {
-         h1: ({ children }) => <h1 className="text-4xl font-bold mb-4 text-white">{children}</h1>,
-         h2: ({ children }) => <h2 className="text-3xl font-bold mb-3 mt-8 text-white">{children}</h2>,
-         h3: ({ children }) => <h3 className="text-2xl font-bold mb-2 mt-6 text-white">{children}</h3>,
-         normal: ({ children }) => <p className="mb-4 text-gray-300 leading-relaxed">{children}</p>,
-         blockquote: ({ children }) => (
-            <blockquote className="border-l-4 border-electric-blue pl-4 italic my-6 text-gray-400">
-               {children}
-            </blockquote>
-         ),
-      },
-      list: {
-         bullet: ({ children }) => <ul className="list-disc list-inside mb-4 text-gray-300">{children}</ul>,
-         number: ({ children }) => <ol className="list-decimal list-inside mb-4 text-gray-300">{children}</ol>,
-      },
-      marks: {
-         strong: ({ children }) => <strong className="font-bold text-white">{children}</strong>,
-         em: ({ children }) => <em className="italic">{children}</em>,
-         code: ({ children }) => (
-            <code className="bg-dark-tertiary px-2 py-1 rounded text-electric-blue font-mono text-sm">{children}</code>
-         ),
-         link: ({ children, value }) => (
-            <a
-               href={value.href}
-               target="_blank"
-               rel="noopener noreferrer"
-               className="text-electric-blue hover:underline">
-               {children}
-            </a>
-         ),
-      },
-      types: {
-         image: ({ value }) => (
-            <div className="my-8">
-               <Image
-                  src={urlFor(value).width(800).height(600).url()}
-                  alt={value.alt || "Blog post image"}
-                  width={800}
-                  height={600}
-                  className="rounded-lg"
-               />
-            </div>
-         ),
-      },
    };
 
    return (
