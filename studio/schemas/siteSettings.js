@@ -4,19 +4,6 @@ export default {
    type: "document",
    fields: [
       {
-         name: "about",
-         title: "About Section",
-         type: "text",
-         description: "Professional bio and company description",
-         validation: (Rule) => Rule.required(),
-      },
-      {
-         name: "tagline",
-         title: "Tagline",
-         type: "string",
-         description: "Short tagline or motto",
-      },
-      {
          name: "email",
          title: "Contact Email",
          type: "string",
