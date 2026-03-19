@@ -57,13 +57,6 @@ export default function Footer({ socialLinks = [] }) {
                      </li>
                      <li>
                         <Link
-                           href="/programs/think-like-a-scientist"
-                           className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
-                           Think Like a Scientist
-                        </Link>
-                     </li>
-                     <li>
-                        <Link
                            href="/insights"
                            className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
                            Insights

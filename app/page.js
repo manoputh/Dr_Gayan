@@ -1,5 +1,5 @@
-import { sanityFetch, urlFor } from "@/lib/sanity";
-import { blogPostsQuery, programBySlugQuery } from "@/lib/queries";
+import { sanityFetch } from "@/lib/sanity";
+import { blogPostsQuery } from "@/lib/queries";
 import Container from "@/components/Container";
 import Button from "@/components/Button";
 import ServiceCard from "@/components/ServiceCard";
@@ -49,10 +49,7 @@ const HOME_SERVICES = [
 ];
 
 export default async function HomePage() {
-   const [blogPosts, featuredProgram] = await Promise.all([
-      sanityFetch({ query: blogPostsQuery }).catch(() => []),
-      sanityFetch({ query: programBySlugQuery, params: { slug: "think-like-a-scientist" } }).catch(() => null),
-   ]);
+   const blogPosts = await sanityFetch({ query: blogPostsQuery }).catch(() => []);
 
    return (
       <>
@@ -99,46 +96,6 @@ export default async function HomePage() {
                </AnimatedSection>
             </Container>
          </section>
-
-         {/* FEATURED PROGRAM SECTION */}
-         {featuredProgram && (
-            <section className="relative py-20 bg-gradient-to-br from-charcoal to-graphite">
-               <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
-
-               <Container>
-                  <AnimatedSection>
-                     <div className="grid lg:grid-cols-2 gap-12 items-center">
-                        <div className="space-y-6">
-                           <div className="inline-block px-4 py-1 bg-electric/10 border border-electric/30 rounded-full">
-                              <span className="text-xs font-semibold tracking-wider uppercase text-electric">
-                                 Featured Program
-                              </span>
-                           </div>
-                           <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white leading-tight">
-                              {featuredProgram.title}
-                           </h2>
-                           <p className="text-lg text-platinum/80 leading-relaxed">{featuredProgram.description}</p>
-                           <div className="pt-4">
-                              <Button href="/programs/think-like-a-scientist" variant="primary">
-                                 Explore Program
-                              </Button>
-                           </div>
-                        </div>
-
-                        {featuredProgram.heroImage && (
-                           <div className="relative aspect-video lg:aspect-square rounded-lg overflow-hidden border border-slate/20">
-                              <img
-                                 src={urlFor(featuredProgram.heroImage).width(800).height(800).url()}
-                                 alt={featuredProgram.heroImage.alt || featuredProgram.title}
-                                 className="w-full h-full object-cover"
-                              />
-                           </div>
-                        )}
-                     </div>
-                  </AnimatedSection>
-               </Container>
-            </section>
-         )}
 
          {/* SERVICES SECTION */}
          {HOME_SERVICES.length > 0 && (
