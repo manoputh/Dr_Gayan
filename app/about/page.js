@@ -41,7 +41,7 @@ const ABOUT_CONTENT = {
          label: "Daily AI predictions running in production systems I built",
       },
       {
-         value: "EUR20M",
+         value: "€20M",
          label: "Documented annual cost savings delivered to clients",
       },
    ],
