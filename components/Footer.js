@@ -57,6 +57,13 @@ export default function Footer({ socialLinks = [] }) {
                      </li>
                      <li>
                         <Link
+                           href="/tools"
+                           className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
+                           Free Tools
+                        </Link>
+                     </li>
+                     <li>
+                        <Link
                            href="/insights"
                            className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
                            Insights

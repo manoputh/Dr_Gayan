@@ -31,6 +31,12 @@ export default function sitemap() {
          priority: 0.6,
       },
       {
+         url: "https://yoursite.com/tools",
+         lastModified: new Date(),
+         changeFrequency: "weekly",
+         priority: 0.85,
+      },
+      {
          url: "https://yoursite.com/contact",
          lastModified: new Date(),
          changeFrequency: "monthly",
