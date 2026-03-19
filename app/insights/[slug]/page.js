@@ -17,18 +17,20 @@ export async function generateMetadata({ params }) {
 
    if (!post) {
       return {
-         title: "Post Not Found",
+         title: "Insight Not Found",
       };
    }
 
    return {
-      title: `${post.title} | AI/ML Consulting Blog`,
-      description: post.excerpt,
+      title: `${post.title} | Insights`,
+      description:
+         post.excerpt ||
+         "Executive insights on AI Audit readiness, EU AI Act compliance, and production AI governance.",
    };
 }
 
-export default async function BlogPostPage({ params }) {
-   // Fetch the blog post
+export default async function InsightPage({ params }) {
+   // Fetch the selected insight
    const post = await sanityFetch({
       query: singleBlogPostQuery,
       params: { slug: params.slug },
@@ -53,20 +55,22 @@ export default async function BlogPostPage({ params }) {
          <Container>
             {/* Back Button */}
             <div className="mb-8">
-               <Link href="/blog" className="text-electric-blue hover:underline flex items-center gap-2">
-                  ← Back to Blog
+               <Link href="/insights" className="text-electric hover:underline flex items-center gap-2">
+                  ← Back to Insights
                </Link>
             </div>
 
             {/* Article Header */}
             <header className="mb-12">
+               <p className="text-xs uppercase tracking-[0.14em] text-electric/80 mb-3">Insight</p>
+
                {/* Categories */}
                {post.categories && post.categories.length > 0 && (
                   <div className="flex flex-wrap gap-2 mb-4">
                      {post.categories.map((category) => (
                         <span
                            key={category._id}
-                           className="text-xs px-3 py-1 bg-electric-blue/10 text-electric-blue rounded-full">
+                           className="text-xs px-3 py-1 bg-electric/10 text-electric rounded-full uppercase tracking-[0.08em]">
                            {category.title}
                         </span>
                      ))}
@@ -109,7 +113,7 @@ export default async function BlogPostPage({ params }) {
 
                {/* Author Bio */}
                {post.author && post.author.bio && (
-                  <div className="mt-12 p-6 bg-dark-secondary rounded-lg border border-graphite/30">
+                  <div className="mt-12 p-6 bg-charcoal rounded-lg border border-slate/20">
                      <div className="flex items-start gap-4">
                         {post.author.image && (
                            <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
@@ -122,20 +126,30 @@ export default async function BlogPostPage({ params }) {
                            </div>
                         )}
                         <div>
-                           <h3 className="text-xl font-bold text-white mb-2">About {post.author.name}</h3>
-                           <p className="text-gray-400">{post.author.bio}</p>
+                           <h3 className="text-xl font-semibold text-white mb-2">About {post.author.name}</h3>
+                           <p className="text-platinum/70">{post.author.bio}</p>
                         </div>
                      </div>
                   </div>
                )}
 
                {/* CTA */}
-               <div className="mt-12 text-center bg-gradient-to-r from-electric-blue/10 to-gold-accent/10 p-8 rounded-lg">
-                  <h3 className="text-2xl font-bold mb-4">Interested in Our Services?</h3>
-                  <p className="text-gray-300 mb-6">Let's discuss how we can help transform your business with AI/ML</p>
-                  <Button href="/contact" variant="primary">
-                     Get in Touch
-                  </Button>
+               <div className="mt-12 text-center bg-gradient-to-r from-electric/8 to-gold/8 p-8 rounded-lg border border-slate/20">
+                  <h3 className="text-2xl font-semibold text-white mb-4">
+                     Need clarity on AI Audit or EU AI Act readiness?
+                  </h3>
+                  <p className="text-platinum/75 mb-6">
+                     Book a 15-minute discovery call to prioritize compliance exposure, technical risk, and practical
+                     next steps.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                     <Button href="/contact" variant="primary">
+                        Book Discovery Call
+                     </Button>
+                     <Button href="/tools" variant="secondary">
+                        Take Free Diagnostic
+                     </Button>
+                  </div>
                </div>
             </div>
          </Container>

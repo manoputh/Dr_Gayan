@@ -14,7 +14,7 @@ export default function Navbar() {
    const navLinks = [
       { name: "Home", href: "/", icon: FaHome },
       { name: "About", href: "/about", icon: FaUser },
-      { name: "Consulting", href: "/consulting", icon: FaBriefcase },
+      { name: "AI Audit", href: "/consulting", icon: FaBriefcase },
       { name: "Free Tools", href: "/tools", icon: FaChartLine },
       { name: "Insights", href: "/insights", icon: FaLightbulb },
       { name: "Contact", href: "/contact", icon: FaEnvelope },
@@ -39,7 +39,7 @@ export default function Navbar() {
                   {isSidebarExpanded && (
                      <div className="overflow-hidden">
                         <span className="text-sm font-semibold text-white whitespace-nowrap">Gayan de Silva, PhD</span>
-                        <p className="text-xs text-steel whitespace-nowrap">AI/ML Architect</p>
+                        <p className="text-xs text-steel whitespace-nowrap">AI Audit & EU AI Act</p>
                      </div>
                   )}
                </Link>
@@ -79,8 +79,8 @@ export default function Navbar() {
             <div className="p-4 border-t border-slate/20">
                {isSidebarExpanded ? (
                   <div className="px-2 py-3">
-                     <p className="text-xs text-steel">Enterprise AI/ML</p>
-                     <p className="text-xs text-steel/60">Strategic Consulting</p>
+                     <p className="text-xs text-steel">AI Audit · EU AI Act</p>
+                     <p className="text-xs text-steel/60">Enterprise AI</p>
                   </div>
                ) : (
                   <div className="w-full h-1 bg-gradient-to-r from-electric/40 to-gold/40 rounded-full"></div>
