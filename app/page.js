@@ -1,20 +1,55 @@
 import { sanityFetch, urlFor } from "@/lib/sanity";
-import { heroQuery, servicesQuery, blogPostsQuery, programBySlugQuery } from "@/lib/queries";
+import { blogPostsQuery, programBySlugQuery } from "@/lib/queries";
 import Container from "@/components/Container";
 import Button from "@/components/Button";
-import SectionHeading from "@/components/SectionHeading";
 import ServiceCard from "@/components/ServiceCard";
 import BlogCard from "@/components/BlogCard";
 import VideoCard from "@/components/VideoCard";
 import AnimatedSection from "@/components/AnimatedSection";
-import Image from "next/image";
 import Link from "next/link";
 
+const HOME_HERO = {
+   headline: "Transforming Vision into Intelligence",
+   subheadline:
+      "Empowering enterprises with strategic AI/ML solutions that drive measurable outcomes and sustainable growth.",
+   ctaText: "Book Consultation",
+   ctaLink: "/consulting",
+};
+
+const HOME_SERVICES = [
+   {
+      _id: "svc-1",
+      title: "AI Strategy & Roadmap",
+      description:
+         "Develop comprehensive AI strategies aligned with business goals through readiness assessments, prioritized use cases, and implementation planning.",
+      icon: "FaLightbulb",
+      features: ["AI Readiness Assessment", "Strategic Planning", "ROI Analysis", "Implementation Roadmap"],
+   },
+   {
+      _id: "svc-2",
+      title: "Machine Learning Solutions",
+      description:
+         "Design and deploy custom ML systems for prediction, optimization, and intelligent automation tailored to your operational context.",
+      icon: "FaBrain",
+      features: [
+         "Custom Model Development",
+         "Predictive Analytics",
+         "Model Training & Tuning",
+         "Performance Optimization",
+      ],
+   },
+   {
+      _id: "svc-3",
+      title: "Data Engineering",
+      description:
+         "Build reliable data foundations with scalable pipelines, quality controls, and production-ready infrastructure for AI workloads.",
+      icon: "FaDatabase",
+      features: ["Data Pipeline Design", "ETL Implementation", "Data Quality Management", "Infrastructure Setup"],
+   },
+];
+
 export default async function HomePage() {
-   // Fetch all data for the home page
-   const [hero, services, blogPosts, featuredProgram] = await Promise.all([
-      sanityFetch({ query: heroQuery }).catch(() => null),
-      sanityFetch({ query: servicesQuery }).catch(() => []),
+   const [blogPosts, featuredProgram] = await Promise.all([
       sanityFetch({ query: blogPostsQuery }).catch(() => []),
       sanityFetch({ query: programBySlugQuery, params: { slug: "think-like-a-scientist" } }).catch(() => null),
    ]);
@@ -43,19 +78,18 @@ export default async function HomePage() {
 
                      {/* Main headline */}
                      <h1 className="text-5xl lg:text-6xl font-serif font-bold text-white leading-tight">
-                        {hero?.headline || "Transforming Vision into Intelligence"}
+                        {HOME_HERO.headline}
                      </h1>
 
                      {/* Subheadline */}
                      <p className="text-xl lg:text-2xl text-platinum/80 leading-relaxed max-w-3xl mx-auto">
-                        {hero?.subheadline ||
-                           "Empowering enterprises with strategic AI/ML solutions that drive measurable outcomes and sustainable growth."}
+                        {HOME_HERO.subheadline}
                      </p>
 
                      {/* CTA Buttons */}
                      <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-                        <Button href={hero?.ctaLink || "/consulting"} variant="primary">
-                           {hero?.ctaText || "Book Consultation"}
+                        <Button href={HOME_HERO.ctaLink} variant="primary">
+                           {HOME_HERO.ctaText}
                         </Button>
                         <Button href="/about" variant="secondary">
                            Learn More About Us
@@ -107,7 +141,7 @@ export default async function HomePage() {
          )}
 
          {/* SERVICES SECTION */}
-         {services.length > 0 && (
+         {HOME_SERVICES.length > 0 && (
             <section className="relative py-32 bg-obsidian">
                <Container>
                   {/* Section intro */}
@@ -129,7 +163,7 @@ export default async function HomePage() {
 
                   {/* Services grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                     {services.map((service, index) => (
+                     {HOME_SERVICES.map((service, index) => (
                         <AnimatedSection key={service._id} delay={index * 100} from="bottom">
                            <ServiceCard service={service} />
                         </AnimatedSection>

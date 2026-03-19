@@ -1,11 +1,40 @@
-import { sanityFetch } from "@/lib/sanity";
-import { servicesQuery } from "@/lib/queries";
 import Container from "@/components/Container";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceCard from "@/components/ServiceCard";
 import AnimatedSection from "@/components/AnimatedSection";
-import EmptyState from "@/components/EmptyState";
 import ConsultingForm from "./ConsultingForm";
+
+const CONSULTING_SERVICES = [
+   {
+      _id: "1",
+      title: "AI Strategy & Roadmap",
+      description:
+         "Develop comprehensive AI strategies aligned with your business objectives. We help you identify opportunities, assess readiness, and create actionable roadmaps.",
+      icon: "FaLightbulb",
+      features: ["AI Readiness Assessment", "Strategic Planning", "ROI Analysis", "Implementation Roadmap"],
+   },
+   {
+      _id: "2",
+      title: "Machine Learning Solutions",
+      description:
+         "Custom ML models and systems tailored to your specific business needs. From predictive analytics to recommendation engines.",
+      icon: "FaBrain",
+      features: [
+         "Custom Model Development",
+         "Predictive Analytics",
+         "Model Training & Tuning",
+         "Performance Optimization",
+      ],
+   },
+   {
+      _id: "3",
+      title: "Data Engineering",
+      description:
+         "Build robust data pipelines and infrastructure to power your AI initiatives. Scalable, reliable, and production-ready.",
+      icon: "FaDatabase",
+      features: ["Data Pipeline Design", "ETL Implementation", "Data Quality Management", "Infrastructure Setup"],
+   },
+];
 
 export const metadata = {
    title: "AI/ML Consulting Services | Enterprise Solutions",
@@ -13,12 +42,7 @@ export const metadata = {
       "Comprehensive AI/ML consulting services for enterprise clients. Strategic planning, implementation, and optimization.",
 };
 
-export default async function ConsultingPage() {
-   // Fetch all consulting services
-   const services = await sanityFetch({
-      query: servicesQuery,
-   }).catch(() => []);
-
+export default function ConsultingPage() {
    return (
       <div className="py-20">
          <Container>
@@ -31,64 +55,13 @@ export default async function ConsultingPage() {
             </AnimatedSection>
 
             {/* Services Grid */}
-            {services.length > 0 ? (
-               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-                  {services.map((service, index) => (
-                     <AnimatedSection key={service._id} delay={index * 100} from="bottom">
-                        <ServiceCard service={service} />
-                     </AnimatedSection>
-                  ))}
-               </div>
-            ) : (
-               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-                  {/* Default services if none in CMS */}
-                  <ServiceCard
-                     service={{
-                        _id: "1",
-                        title: "AI Strategy & Roadmap",
-                        description:
-                           "Develop comprehensive AI strategies aligned with your business objectives. We help you identify opportunities, assess readiness, and create actionable roadmaps.",
-                        icon: "FaLightbulb",
-                        features: [
-                           "AI Readiness Assessment",
-                           "Strategic Planning",
-                           "ROI Analysis",
-                           "Implementation Roadmap",
-                        ],
-                     }}
-                  />
-                  <ServiceCard
-                     service={{
-                        _id: "2",
-                        title: "Machine Learning Solutions",
-                        description:
-                           "Custom ML models and systems tailored to your specific business needs. From predictive analytics to recommendation engines.",
-                        icon: "FaBrain",
-                        features: [
-                           "Custom Model Development",
-                           "Predictive Analytics",
-                           "Model Training & Tuning",
-                           "Performance Optimization",
-                        ],
-                     }}
-                  />
-                  <ServiceCard
-                     service={{
-                        _id: "3",
-                        title: "Data Engineering",
-                        description:
-                           "Build robust data pipelines and infrastructure to power your AI initiatives. Scalable, reliable, and production-ready.",
-                        icon: "FaDatabase",
-                        features: [
-                           "Data Pipeline Design",
-                           "ETL Implementation",
-                           "Data Quality Management",
-                           "Infrastructure Setup",
-                        ],
-                     }}
-                  />
-               </div>
-            )}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+               {CONSULTING_SERVICES.map((service, index) => (
+                  <AnimatedSection key={service._id} delay={index * 100} from="bottom">
+                     <ServiceCard service={service} />
+                  </AnimatedSection>
+               ))}
+            </div>
 
             {/* Why Choose Us Section */}
             <AnimatedSection>
