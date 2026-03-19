@@ -121,6 +121,12 @@ const DIAGNOSTIC_HIGHLIGHTS = [
 export default async function HomePage() {
    const blogPosts = await sanityFetch({ query: blogPostsQuery }).catch(() => []);
 
+   const isYouTubeInsight = (post) => {
+      const source = String(post?.source || "").toLowerCase();
+      const candidateUrl = String(post?.youtubeUrl || post?.externalUrl || "").toLowerCase();
+      return source === "youtube" || post?.contentType === "video" || /(youtube\.com|youtu\.be)/.test(candidateUrl);
+   };
+
    return (
       <>
          {/* HERO SECTION - Clean & Focused */}
@@ -339,11 +345,7 @@ export default async function HomePage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                      {blogPosts.slice(0, 3).map((post, index) => (
                         <AnimatedSection key={post._id} delay={index * 120} from="bottom">
-                           {post.contentType === "video" && post.youtubeUrl ? (
-                              <VideoCard video={post} />
-                           ) : (
-                              <BlogCard post={post} />
-                           )}
+                           {isYouTubeInsight(post) ? <VideoCard video={post} /> : <BlogCard post={post} />}
                         </AnimatedSection>
                      ))}
                   </div>

@@ -1,12 +1,27 @@
 export default {
    name: "blogPost",
-   title: "Insights (Articles & Videos)",
+   title: "Insights (LinkedIn & YouTube)",
    type: "document",
    fields: [
+      {
+         name: "source",
+         title: "Source",
+         type: "string",
+         options: {
+            list: [
+               { title: "LinkedIn", value: "linkedin" },
+               { title: "YouTube", value: "youtube" },
+            ],
+            layout: "radio",
+         },
+         initialValue: "linkedin",
+         validation: (Rule) => Rule.required(),
+      },
       {
          name: "contentType",
          title: "Content Type",
          type: "string",
+         description: "Legacy field. Use Source and External URL instead.",
          options: {
             list: [
                { title: "Article", value: "article" },
@@ -15,52 +30,55 @@ export default {
             layout: "radio",
          },
          initialValue: "article",
-         validation: (Rule) => Rule.required(),
+         hidden: true,
       },
       {
          name: "title",
          title: "Title",
          type: "string",
-         validation: (Rule) => Rule.required(),
+         description: "Optional. If empty, website attempts preview title extraction for LinkedIn URLs.",
       },
       {
          name: "slug",
          title: "Slug",
          type: "slug",
-         description: "URL-friendly version of the title",
+         description: "Optional. Needed only for internal detail pages.",
          options: {
             source: "title",
             maxLength: 96,
          },
-         validation: (Rule) => Rule.required(),
       },
       {
          name: "excerpt",
          title: "Excerpt",
          type: "text",
-         description: "Short summary for preview cards (only for articles)",
-         hidden: ({ document }) => document?.contentType === "video",
+         description: "Optional. If empty for LinkedIn URLs, website attempts preview description extraction.",
+      },
+      {
+         name: "externalUrl",
+         title: "External URL",
+         type: "url",
+         description: "Paste the LinkedIn post URL or YouTube URL.",
+         validation: (Rule) => Rule.required(),
       },
       {
          name: "youtubeUrl",
          title: "YouTube URL",
          type: "url",
-         description: "Only for video content type",
-         hidden: ({ document }) => document?.contentType !== "video",
+         description: "Legacy field. Prefer External URL.",
+         hidden: true,
       },
       {
          name: "videoDuration",
          title: "Video Duration",
          type: "string",
-         description: "e.g., '5:30' (only for videos)",
-         hidden: ({ document }) => document?.contentType !== "video",
+         description: "Optional, e.g., '5:30'.",
       },
       {
          name: "mainImage",
          title: "Main Image / Thumbnail",
          type: "image",
-         description: "Featured image for articles",
-         hidden: ({ document }) => document?.contentType === "video",
+         description: "Optional thumbnail override. If empty, website attempts URL-based preview image.",
          options: {
             hotspot: true,
          },
@@ -89,8 +107,7 @@ export default {
          name: "body",
          title: "Body Content",
          type: "array",
-         description: "Only required for articles",
-         hidden: ({ document }) => document?.contentType === "video",
+         description: "Optional long-form content for internal insight pages.",
          of: [
             {
                type: "block",
@@ -141,4 +158,18 @@ export default {
          by: [{ field: "publishedAt", direction: "desc" }],
       },
    ],
+   preview: {
+      select: {
+         title: "title",
+         source: "source",
+         externalUrl: "externalUrl",
+      },
+      prepare({ title, source, externalUrl }) {
+         const sourceLabel = source === "youtube" ? "YouTube" : "LinkedIn";
+         return {
+            title: title || `${sourceLabel} post`,
+            subtitle: externalUrl || `${sourceLabel} insight`,
+         };
+      },
+   },
 };

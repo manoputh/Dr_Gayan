@@ -1,5 +1,6 @@
 import { sanityFetch } from "@/lib/sanity";
 import { blogPostsQuery } from "@/lib/queries";
+import { enrichInsightsWithLinkedInPreview } from "@/lib/insights/linkedinPreview";
 import InsightsHub from "./InsightsHub";
 
 export const metadata = {
@@ -13,5 +14,7 @@ export default async function InsightsPage() {
       query: blogPostsQuery,
    }).catch(() => []);
 
-   return <InsightsHub insights={insights} />;
+   const enrichedInsights = await enrichInsightsWithLinkedInPreview(insights);
+
+   return <InsightsHub insights={enrichedInsights} />;
 }

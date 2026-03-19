@@ -9,9 +9,10 @@ import { urlFor } from "@/lib/sanity";
  * @param {Object} post - Article data from Sanity
  */
 export default function BlogCard({ post }) {
-   // Format date
    const formatDate = (dateString) => {
+      if (!dateString) return "Recent";
       const date = new Date(dateString);
+      if (Number.isNaN(date.getTime())) return "Recent";
       return date.toLocaleDateString("en-US", {
          year: "numeric",
          month: "short",
@@ -20,51 +21,59 @@ export default function BlogCard({ post }) {
    };
 
    const thumbnailUrl = post.mainImage ? urlFor(post.mainImage).width(800).height(450).url() : null;
+   const internalHref = post?.slug?.current ? `/insights/${post.slug.current}` : null;
+   const externalHref = post?.externalUrl || post?.linkedinUrl || null;
+   const source = String(post?.source || "").toLowerCase();
+   const sourceLabel = source === "linkedin" ? "LinkedIn" : "Insight";
+   const title = post?.title || "Insight";
+   const excerpt = post?.resolvedExcerpt || post?.excerpt || "";
+   const mainCategory = post?.categories && post.categories.length > 0 ? post.categories[0]?.title : null;
 
-   return (
-      <Link href={`/insights/${post.slug.current}`} className="group block h-full">
-         <div className="bg-charcoal rounded-sm border border-slate/20 overflow-hidden card-interactive hover:border-slate/40 h-full flex flex-col">
-            {/* Image */}
-            {thumbnailUrl && (
-               <div className="relative aspect-video w-full overflow-hidden bg-graphite">
-                  <Image
-                     src={thumbnailUrl}
-                     alt={post.mainImage?.alt || post.title}
-                     fill
-                     className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+   const card = (
+      <div className="bg-charcoal border border-slate/20 rounded-lg overflow-hidden hover:border-electric/30 transition-all duration-300 h-full flex flex-col">
+         {thumbnailUrl && (
+            <div className="relative aspect-[16/9] w-full overflow-hidden bg-obsidian/70">
+               <Image src={thumbnailUrl} alt={post.mainImage?.alt || title} fill className="object-cover" />
+            </div>
+         )}
+
+         <div className="p-4 md:p-5 flex-1 flex flex-col">
+            <div className="flex items-start justify-between gap-3 mb-2.5">
+               <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-[10px] uppercase tracking-[0.08em] text-electric">{sourceLabel}</span>
+                  {mainCategory && <span className="text-xs text-steel">{mainCategory}</span>}
                </div>
-            )}
+               <span className="text-xs text-steel whitespace-nowrap">{formatDate(post?.publishedAt)}</span>
+            </div>
 
-            {/* Content */}
-            <div className="p-6 flex flex-col flex-1" style={{ minHeight: "180px" }}>
-               {/* Categories */}
-               {post.categories && post.categories.length > 0 && (
-                  <div className="flex items-center space-x-2 mb-3">
-                     <span className="text-xs px-2 py-1 rounded-sm uppercase tracking-wide bg-gold/10 text-gold">
-                        Article
-                     </span>
-                     <span className="text-xs text-steel">{post.categories[0].title}</span>
-                  </div>
-               )}
+            <h3 className="text-lg font-serif font-semibold text-white leading-snug mb-2 line-clamp-2">{title}</h3>
 
-               {/* Title */}
-               <h3 className="text-xl font-semibold text-white mb-2 line-clamp-2 group-hover:text-platinum transition-colors">
-                  {post.title}
-               </h3>
+            {excerpt && <p className="text-sm text-platinum/70 leading-relaxed mb-4 line-clamp-2">{excerpt}</p>}
 
-               {/* Excerpt */}
-               {post.excerpt && (
-                  <p className="text-platinum/60 text-sm mb-4 line-clamp-2 leading-relaxed">{post.excerpt}</p>
-               )}
-
-               {/* Meta Info */}
-               <div className="flex items-center justify-between text-xs text-steel pt-4 border-t border-slate/10">
-                  <span>{formatDate(post.publishedAt)}</span>
-                  {post.author && <span>{post.author.name}</span>}
-               </div>
+            <div className="flex items-center justify-end pt-3 border-t border-slate/15 mt-auto">
+               <span className="text-sm text-electric-muted">
+                  {internalHref ? "Read insight" : externalHref ? "View post" : "Insight unavailable"}
+               </span>
             </div>
          </div>
-      </Link>
+      </div>
    );
+
+   if (internalHref) {
+      return (
+         <Link href={internalHref} className="group block h-full">
+            {card}
+         </Link>
+      );
+   }
+
+   if (externalHref) {
+      return (
+         <a href={externalHref} target="_blank" rel="noopener noreferrer" className="group block h-full">
+            {card}
+         </a>
+      );
+   }
+
+   return <div className="group block h-full">{card}</div>;
 }

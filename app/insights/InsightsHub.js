@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/lib/sanity";
 import Container from "@/components/Container";
@@ -43,15 +42,32 @@ function formatDate(dateString) {
 }
 
 function extractYouTubeId(url) {
-   if (!url) return null;
-   const standardMatch = url.match(/(?:youtube\.com\/watch\?v=)([a-zA-Z0-9_-]{11})/);
-   if (standardMatch) return standardMatch[1];
+   if (!url || typeof url !== "string") return null;
 
-   const shortUrlMatch = url.match(/(?:youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-   if (shortUrlMatch) return shortUrlMatch[1];
+   try {
+      const parsed = new URL(url);
+      const hostname = parsed.hostname.replace(/^www\./, "").toLowerCase();
 
-   const shortsMatch = url.match(/(?:youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/);
-   if (shortsMatch) return shortsMatch[1];
+      if (hostname === "youtu.be") {
+         const id = parsed.pathname.replace("/", "").trim();
+         return id || null;
+      }
+
+      if (hostname === "youtube.com" || hostname === "m.youtube.com") {
+         if (parsed.pathname === "/watch") {
+            return parsed.searchParams.get("v");
+         }
+
+         const shortsMatch = parsed.pathname.match(/^\/shorts\/([a-zA-Z0-9_-]{11})/);
+         if (shortsMatch) return shortsMatch[1];
+
+         const embedMatch = parsed.pathname.match(/^\/embed\/([a-zA-Z0-9_-]{11})/);
+         if (embedMatch) return embedMatch[1];
+      }
+   } catch {
+      const fallbackMatch = url.match(/([a-zA-Z0-9_-]{11})/);
+      if (fallbackMatch) return fallbackMatch[1];
+   }
 
    return null;
 }
@@ -113,43 +129,47 @@ function getPrimaryTopic(item) {
 function buildSearchText(item) {
    const categories = (item.categories || []).map((category) => category?.title || "").join(" ");
    const topics = (item.topicKeys || []).join(" ");
-   return [item.title, item.excerpt, categories, topics].filter(Boolean).join(" ").toLowerCase();
+   return [item.title, item.excerpt, item.bodyPlain, categories, topics].filter(Boolean).join(" ").toLowerCase();
 }
 
 function LinkedInCard({ item }) {
-   const externalUrl = item.linkedinUrl || item.externalUrl || null;
-   const primaryTopic = getPrimaryTopic(item);
-   const mainCategory =
-      item.categories && item.categories.length > 0 ? item.categories[0].title : TOPIC_LABELS[primaryTopic];
-   const imageUrl = item.mainImage ? urlFor(item.mainImage).width(1200).height(675).url() : null;
+   const externalUrl = item.externalUrl || item.linkedinUrl || null;
+   const sourceLabel = item.preview?.sourceLabel || "LinkedIn";
+   const displayTitle = item.resolvedTitle || "LinkedIn post";
+   const displayExcerpt = item.resolvedExcerpt || "View this post on LinkedIn.";
+   const mainCategory = item.categories && item.categories.length > 0 ? item.categories[0].title : null;
+   const hasSanityImage = Boolean(item.mainImage);
+   const imageUrl = hasSanityImage
+      ? urlFor(item.mainImage).width(1200).height(675).url()
+      : (item.preview?.imageUrl || "").trim() || null;
 
    return (
-      <div className="bg-charcoal border border-slate/20 rounded-lg overflow-hidden hover:border-electric/30 transition-all duration-300">
+      <div className="bg-charcoal border border-slate/20 rounded-lg overflow-hidden hover:border-electric/30 transition-all duration-300 h-full">
          {imageUrl && (
-            <div className="relative aspect-video w-full overflow-hidden bg-obsidian/70">
-               <Image src={imageUrl} alt={item.mainImage?.alt || item.title} fill className="object-cover" />
+            <div className="relative aspect-[16/9] w-full overflow-hidden bg-obsidian/70">
+               {hasSanityImage ? (
+                  <Image src={imageUrl} alt={item.mainImage?.alt || displayTitle} fill className="object-cover" />
+               ) : (
+                  <img src={imageUrl} alt={displayTitle} className="w-full h-full object-cover" loading="lazy" />
+               )}
             </div>
          )}
 
-         <div className="p-6">
-            <div className="flex items-start justify-between gap-3 mb-3">
+         <div className="p-4 md:p-5">
+            <div className="flex items-start justify-between gap-3 mb-2.5">
                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-[10px] uppercase tracking-[0.1em] px-2 py-1 rounded-sm bg-electric/10 text-electric">
-                     {TOPIC_LABELS[primaryTopic]}
-                  </span>
+                  <span className="text-[10px] uppercase tracking-[0.08em] text-electric">{sourceLabel}</span>
                   {mainCategory && <span className="text-xs text-steel">{mainCategory}</span>}
                </div>
                <span className="text-xs text-steel whitespace-nowrap">{formatDate(item.publishedAt)}</span>
             </div>
 
-            <h3 className="text-xl font-serif font-semibold text-white leading-snug mb-3">{item.title}</h3>
-            <p className="text-sm text-platinum/70 leading-relaxed mb-5 line-clamp-3">
-               {item.excerpt ||
-                  "Editorial analysis focused on AI Audit readiness, governance controls, and EU AI Act execution in production contexts."}
-            </p>
+            <h3 className="text-lg font-serif font-semibold text-white leading-snug mb-2 line-clamp-2">
+               {displayTitle}
+            </h3>
+            <p className="text-sm text-platinum/70 leading-relaxed mb-4 line-clamp-2">{displayExcerpt}</p>
 
-            <div className="flex items-center justify-between pt-4 border-t border-slate/15">
-               <span className="text-xs text-steel">LinkedIn-style insight</span>
+            <div className="flex items-center justify-end pt-3 border-t border-slate/15">
                {externalUrl ? (
                   <a
                      href={externalUrl}
@@ -159,11 +179,7 @@ function LinkedInCard({ item }) {
                      View on LinkedIn
                   </a>
                ) : (
-                  <Link
-                     href={`/insights/${item.slug.current}`}
-                     className="text-sm text-electric hover:text-electric-muted transition-colors">
-                     Read insight
-                  </Link>
+                  <span className="text-sm text-steel">LinkedIn URL unavailable</span>
                )}
             </div>
          </div>
@@ -172,14 +188,25 @@ function LinkedInCard({ item }) {
 }
 
 function YouTubeCard({ item }) {
-   const videoId = extractYouTubeId(item.youtubeUrl);
+   const [isPlaying, setIsPlaying] = useState(false);
+   const sourceUrl = item.youtubeUrl || item.externalUrl || "";
+   const videoId = extractYouTubeId(sourceUrl);
    const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : null;
-   const primaryTopic = getPrimaryTopic(item);
-
+   const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+   const watchUrl = videoId ? `https://www.youtube.com/watch?v=${videoId}` : sourceUrl || null;
    return (
-      <div className="bg-charcoal border border-slate/20 rounded-lg overflow-hidden hover:border-red-500/40 transition-all duration-300">
-         <div className="relative aspect-video w-full bg-obsidian/80 overflow-hidden">
-            {thumbnailUrl ? (
+      <div className="bg-charcoal border border-slate/20 rounded-lg overflow-hidden hover:border-red-500/40 transition-all duration-300 h-full">
+         <div className="relative aspect-[16/9] w-full bg-obsidian/80 overflow-hidden">
+            {isPlaying && embedUrl ? (
+               <iframe
+                  src={`${embedUrl}?autoplay=1&rel=0&modestbranding=1`}
+                  title={item.title || "YouTube video"}
+                  className="absolute inset-0 w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+               />
+            ) : thumbnailUrl ? (
                <Image src={thumbnailUrl} alt={item.title} fill className="object-cover" />
             ) : (
                <div className="absolute inset-0 flex items-center justify-center">
@@ -188,6 +215,19 @@ function YouTubeCard({ item }) {
                   </div>
                </div>
             )}
+
+            {!isPlaying && embedUrl && (
+               <button
+                  type="button"
+                  onClick={() => setIsPlaying(true)}
+                  className="absolute inset-0 flex items-center justify-center bg-obsidian/35 hover:bg-obsidian/20 transition-colors"
+                  aria-label="Play video on page">
+                  <span className="w-14 h-14 rounded-full bg-red-600/95 flex items-center justify-center shadow-lg">
+                     <FaPlay className="text-white text-xl ml-1" />
+                  </span>
+               </button>
+            )}
+
             {item.videoDuration && (
                <span className="absolute bottom-3 right-3 text-xs px-2 py-1 rounded-sm bg-obsidian/90 text-white">
                   {item.videoDuration}
@@ -195,32 +235,27 @@ function YouTubeCard({ item }) {
             )}
          </div>
 
-         <div className="p-5">
+         <div className="p-4">
             <div className="flex items-center justify-between gap-3 mb-2">
-               <span className="text-[10px] uppercase tracking-[0.1em] px-2 py-1 rounded-sm bg-red-500/10 text-red-400">
-                  {TOPIC_LABELS[primaryTopic]}
-               </span>
+               <span className="text-xs text-steel uppercase tracking-[0.08em]">YouTube</span>
                <span className="text-xs text-steel">{formatDate(item.publishedAt)}</span>
             </div>
 
-            <h3 className="text-lg font-serif font-semibold text-white leading-snug mb-3 line-clamp-2">{item.title}</h3>
+            <h3 className="text-base font-serif font-semibold text-white leading-snug mb-2 line-clamp-2">
+               {item.resolvedTitle || item.title || "YouTube video"}
+            </h3>
 
-            <div className="pt-3 border-t border-slate/15 flex items-center justify-between">
-               <span className="text-xs text-steel">YouTube insight</span>
-               {item.youtubeUrl ? (
+            <div className="pt-3 border-t border-slate/15 flex items-center justify-end">
+               {watchUrl ? (
                   <a
-                     href={item.youtubeUrl}
+                     href={watchUrl}
                      target="_blank"
                      rel="noopener noreferrer"
                      className="text-sm text-red-400 hover:text-red-300 transition-colors">
                      Watch on YouTube
                   </a>
                ) : (
-                  <Link
-                     href={`/insights/${item.slug.current}`}
-                     className="text-sm text-red-400 hover:text-red-300 transition-colors">
-                     View detail
-                  </Link>
+                  <span className="text-sm text-steel">YouTube URL unavailable</span>
                )}
             </div>
          </div>
@@ -235,13 +270,41 @@ export default function InsightsHub({ insights }) {
 
    const normalizedItems = useMemo(() => {
       return (insights || []).map((item) => {
-         const source = item.contentType === "video" ? "youtube" : "linkedin";
-         const topicKeys = inferTopics(item);
+         const candidateUrl = item.externalUrl || item.youtubeUrl || item.linkedinUrl || "";
+         const source =
+            item.source ||
+            (item.contentType === "video" ? "youtube" : null) ||
+            (/(youtube\.com|youtu\.be)/i.test(candidateUrl) ? "youtube" : "linkedin");
+
+         const resolvedTitle =
+            (item.title || "").trim() ||
+            (item.preview?.title || "").trim() ||
+            (source === "youtube" ? "YouTube video" : "LinkedIn post");
+
+         const resolvedExcerpt =
+            (item.excerpt || "").trim() ||
+            (item.preview?.excerpt || "").trim() ||
+            (item.bodyPlain || "").trim() ||
+            (source === "youtube" ? "Watch this video on YouTube." : "View this post on LinkedIn.");
+
+         const topicKeys = inferTopics({
+            ...item,
+            title: resolvedTitle,
+            excerpt: resolvedExcerpt,
+         });
+
          return {
             ...item,
             source,
+            resolvedTitle,
+            resolvedExcerpt,
             topicKeys,
-            searchIndex: buildSearchText({ ...item, topicKeys }),
+            searchIndex: buildSearchText({
+               ...item,
+               title: resolvedTitle,
+               excerpt: resolvedExcerpt,
+               topicKeys,
+            }),
          };
       });
    }, [insights]);
@@ -394,10 +457,10 @@ export default function InsightsHub({ insights }) {
                      <div id="linkedin" className="mb-10 scroll-mt-28">
                         <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate/20">
                            <FaLinkedin className="text-electric text-lg" />
-                           <h2 className="text-2xl font-serif font-semibold text-white">LinkedIn Posts</h2>
+                           <h2 className="text-2xl font-serif font-semibold text-white">LinkedIn Insights</h2>
                            <span className="text-xs text-steel">{linkedInItems.length}</span>
                         </div>
-                        <div className="space-y-4">
+                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                            {linkedInItems.map((item, index) => (
                               <AnimatedSection key={item._id} delay={index * 70} from="bottom">
                                  <LinkedInCard item={item} />
@@ -411,7 +474,7 @@ export default function InsightsHub({ insights }) {
                      <div id="youtube" className="mb-10 scroll-mt-28">
                         <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate/20">
                            <FaYoutube className="text-red-500 text-lg" />
-                           <h2 className="text-2xl font-serif font-semibold text-white">YouTube Videos</h2>
+                           <h2 className="text-2xl font-serif font-semibold text-white">Video Briefings</h2>
                            <span className="text-xs text-steel">{youTubeItems.length}</span>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
