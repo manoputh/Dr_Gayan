@@ -3,13 +3,13 @@ import AnimatedSection from "@/components/AnimatedSection";
 import Button from "@/components/Button";
 
 const ABOUT_CONTENT = {
-   name: "Dr. Gayan De Silva",
-   title: "Principal AI/ML Architect & Strategic Consultant",
+   name: "Gayan de Silva, PhD",
+   title: "Principal AI/ML Architect and Executive Advisor",
    philosophy:
-      "We combine strategic clarity with engineering rigor to help organizations build AI systems that create real, durable business value.",
+      "Strategic AI leadership succeeds when business priorities, risk controls, and technical execution are aligned from day one.",
    bio: [
-      "We are a premier AI/ML consulting firm specializing in enterprise-level solutions that drive measurable business outcomes. With extensive experience across Fortune 500 companies and high-growth startups, we bring strategic insight and technical excellence to every engagement.",
-      "Our approach combines deep industry knowledge with practical AI/ML delivery. We partner with executive and technical teams to identify high-value opportunities, design robust solutions, and implement systems that scale with confidence.",
+      "Gayan de Silva, PhD advises enterprise and growth-stage leadership teams on AI strategy, operating models, and implementation priorities that deliver measurable commercial outcomes.",
+      "Engagements focus on industry-specific transformation across financial services, healthcare, manufacturing, technology, and retail, combining executive advisory with hands-on architecture guidance.",
    ],
    industryExperience: [
       {
@@ -47,7 +47,7 @@ const ABOUT_CONTENT = {
 };
 
 export const metadata = {
-   title: "About | Dr. Gayan De Silva",
+   title: "About | Gayan de Silva, PhD",
    description: "Industry-focused AI/ML leader, strategic consultant, and educator driving enterprise transformation.",
 };
 

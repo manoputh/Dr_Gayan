@@ -6,7 +6,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import Button from "@/components/Button";
 
 export const metadata = {
-   title: "Think Like a Scientist | Dr. Gayan De Silva",
+   title: "Think Like a Scientist | Gayan de Silva, PhD",
    description:
       "A structured course program designed to build scientific thinking for professionals, leaders, and lifelong learners.",
 };

@@ -8,7 +8,7 @@ import { siteSettingsQuery } from "@/lib/queries";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-   title: "Dr. Gayan De Silva | Principal AI/ML Architect",
+   title: "Gayan de Silva, PhD | Principal AI/ML Architect",
    description:
       "Strategic AI/ML consulting and implementation for enterprise-scale transformation. Industry-leading expertise in machine learning architecture and intelligent systems.",
    keywords: "AI architect, machine learning consulting, enterprise AI, ML strategy, AI leadership",

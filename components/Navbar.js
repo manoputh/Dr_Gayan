@@ -38,7 +38,7 @@ export default function Navbar() {
                   </div>
                   {isSidebarExpanded && (
                      <div className="overflow-hidden">
-                        <span className="text-sm font-semibold text-white whitespace-nowrap">Dr. Gayan</span>
+                        <span className="text-sm font-semibold text-white whitespace-nowrap">Gayan de Silva, PhD</span>
                         <p className="text-xs text-steel whitespace-nowrap">AI/ML Architect</p>
                      </div>
                   )}
@@ -97,7 +97,7 @@ export default function Navbar() {
                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-electric/20 to-gold/20 flex items-center justify-center">
                         <span className="text-sm font-serif font-bold text-white">G</span>
                      </div>
-                     <span className="text-sm font-semibold text-white">Dr. Gayan De Silva</span>
+                     <span className="text-sm font-semibold text-white">Gayan de Silva, PhD</span>
                   </Link>
 
                   {/* Mobile Menu Button */}

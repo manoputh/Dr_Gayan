@@ -23,7 +23,7 @@ export default function Footer({ socialLinks = [] }) {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16">
                {/* Brand Column - Takes more space for impact */}
                <div className="md:col-span-5 lg:col-span-4">
-                  <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">Dr. Gayan de Silva</h3>
+                  <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">Gayan de Silva, PhD</h3>
                   <p className="text-steel text-sm leading-relaxed max-w-sm">AI/ML Consulting & Innovation</p>
                   <p className="text-steel/70 text-xs mt-4 leading-relaxed max-w-sm">
                      Strategic artificial intelligence solutions for enterprise transformation
@@ -135,7 +135,7 @@ export default function Footer({ socialLinks = [] }) {
             <div className="mt-16 pt-8 border-t border-slate/20">
                <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                   <div className="text-steel/60 text-xs tracking-wide">
-                     <p>© {currentYear} Dr. Gayan de Silva. All rights reserved.</p>
+                     <p>© {currentYear} Gayan de Silva, PhD. All rights reserved.</p>
                   </div>
                   <div className="text-steel/60 text-xs tracking-wide">
                      <p>Enterprise AI Consulting</p>
