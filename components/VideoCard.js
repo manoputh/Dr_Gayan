@@ -107,7 +107,9 @@ export default function VideoCard({ video }) {
                   <span className="text-xs text-steel">{publishedAtText}</span>
                </div>
 
-               <h3 className="text-base font-serif font-semibold text-white leading-snug mb-2 line-clamp-2">{title}</h3>
+               <h3 className="text-base font-serif font-semibold text-white leading-snug mb-2 line-clamp-2 min-h-[3rem]">
+                  {title}
+               </h3>
 
                <div className="pt-3 border-t border-slate/15 flex items-center justify-end mt-auto">
                   {watchUrl ? (
@@ -115,7 +117,7 @@ export default function VideoCard({ video }) {
                         href={watchUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-red-400 hover:text-red-300 transition-colors">
+                        className="text-sm text-red-400 hover:text-red-300 transition-colors">
                         Watch on YouTube
                      </a>
                   ) : (

@@ -24,6 +24,8 @@ export default function BlogCard({ post }) {
    const internalHref = post?.slug?.current ? `/insights/${post.slug.current}` : null;
    const externalHref = post?.externalUrl || post?.linkedinUrl || null;
    const source = String(post?.source || "").toLowerCase();
+   const isLinkedInPost = source === "linkedin" || /linkedin\.com/i.test(String(externalHref || ""));
+   const preferredHref = isLinkedInPost && externalHref ? externalHref : internalHref || externalHref;
    const sourceLabel = source === "linkedin" ? "LinkedIn" : "Insight";
    const title = post?.title || "Insight";
    const excerpt = post?.resolvedExcerpt || post?.excerpt || "";
@@ -52,26 +54,32 @@ export default function BlogCard({ post }) {
 
             <div className="flex items-center justify-end pt-3 border-t border-slate/15 mt-auto">
                <span className="text-sm text-electric-muted">
-                  {internalHref ? "Read insight" : externalHref ? "View post" : "Insight unavailable"}
+                  {isLinkedInPost && externalHref
+                     ? "View on LinkedIn"
+                     : internalHref
+                       ? "Read insight"
+                       : externalHref
+                         ? "View post"
+                         : "Insight unavailable"}
                </span>
             </div>
          </div>
       </div>
    );
 
-   if (internalHref) {
+   if (preferredHref) {
+      if (/^https?:\/\//i.test(preferredHref)) {
+         return (
+            <a href={preferredHref} target="_blank" rel="noopener noreferrer" className="group block h-full">
+               {card}
+            </a>
+         );
+      }
+
       return (
-         <Link href={internalHref} className="group block h-full">
+         <Link href={preferredHref} className="group block h-full">
             {card}
          </Link>
-      );
-   }
-
-   if (externalHref) {
-      return (
-         <a href={externalHref} target="_blank" rel="noopener noreferrer" className="group block h-full">
-            {card}
-         </a>
       );
    }
 

@@ -235,17 +235,17 @@ function YouTubeCard({ item }) {
             )}
          </div>
 
-         <div className="p-4">
+         <div className="p-4 md:p-5 flex-1 flex flex-col">
             <div className="flex items-center justify-between gap-3 mb-2">
                <span className="text-xs text-steel uppercase tracking-[0.08em]">YouTube</span>
                <span className="text-xs text-steel">{formatDate(item.publishedAt)}</span>
             </div>
 
-            <h3 className="text-base font-serif font-semibold text-white leading-snug mb-2 line-clamp-2">
+            <h3 className="text-base font-serif font-semibold text-white leading-snug mb-2 line-clamp-2 min-h-[3rem]">
                {item.resolvedTitle || item.title || "YouTube video"}
             </h3>
 
-            <div className="pt-3 border-t border-slate/15 flex items-center justify-end">
+            <div className="pt-3 border-t border-slate/15 flex items-center justify-end mt-auto">
                {watchUrl ? (
                   <a
                      href={watchUrl}

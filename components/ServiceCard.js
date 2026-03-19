@@ -20,23 +20,23 @@ export default function ServiceCard({ service }) {
    const Icon = iconMap[service.icon] || FaBrain;
 
    return (
-      <div className="group bg-charcoal p-8 rounded-lg border border-slate/20 card-interactive hover:border-electric/40">
+      <div className="group bg-charcoal p-8 rounded-lg border border-slate/20 card-interactive hover:border-electric/40 h-full flex flex-col">
          {/* Icon */}
          <div className="w-16 h-16 bg-gradient-to-br from-electric/20 to-electric/10 rounded-lg flex items-center justify-center mb-6 transition-colors duration-300 group-hover:from-electric/30 group-hover:to-electric/20">
             <Icon className="text-electric text-2xl" />
          </div>
 
          {/* Title */}
-         <h3 className="text-xl font-semibold text-white mb-4 transition-colors duration-300 group-hover:text-platinum">
+         <h3 className="text-xl font-semibold text-white mb-4 transition-colors duration-300 group-hover:text-platinum min-h-[3.5rem]">
             {service.title}
          </h3>
 
          {/* Description */}
-         <p className="text-steel mb-6 leading-relaxed">{service.description}</p>
+         <p className="text-steel mb-6 leading-relaxed min-h-[7.5rem]">{service.description}</p>
 
          {/* Features */}
          {service.features && service.features.length > 0 && (
-            <ul className="space-y-2">
+            <ul className="space-y-2 mt-auto">
                {service.features.map((feature, index) => (
                   <li key={index} className="flex items-start">
                      <span className="text-electric mr-2">✓</span>
