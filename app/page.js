@@ -13,7 +13,7 @@ const HOME_HERO = {
    subheadline:
       "In a focused assessment, identify which production AI systems create regulatory and operational exposure, and get a 90-day remediation roadmap.",
    ctaText: "Start AI Compliance Audit",
-   ctaLink: "/consulting",
+   ctaLink: "/Audit",
 };
 
 const AI_AUDIT_INCLUDED = [
@@ -172,7 +172,7 @@ export default async function HomePage() {
          </section>
 
          {/* FREE DIAGNOSTIC SECTION */}
-         <section className="relative py-32 bg-charcoal">
+         <section id="diagnostic" className="relative py-32 bg-charcoal scroll-mt-28">
             <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
 
             <Container>
@@ -264,7 +264,7 @@ export default async function HomePage() {
 
          {/* WHAT IS INCLUDED SECTION */}
          {AI_AUDIT_INCLUDED.length > 0 && (
-            <section className="relative py-32 bg-obsidian">
+            <section id="methodology" className="relative py-32 bg-obsidian scroll-mt-28">
                <Container>
                   {/* Section intro */}
                   <AnimatedSection>
@@ -294,7 +294,7 @@ export default async function HomePage() {
                   {/* Link to full audit details */}
                   <div className="text-center mt-16">
                      <Link
-                        href="/consulting"
+                        href="/Audit"
                         className="inline-flex items-center text-sm tracking-wide uppercase text-platinum hover:text-white transition-colors group">
                         <span>Review Full Audit Methodology</span>
                         <svg
@@ -368,7 +368,7 @@ export default async function HomePage() {
          )}
 
          {/* FINAL CTA SECTION */}
-         <section className="relative py-32 bg-obsidian">
+         <section id="contact" className="relative py-32 bg-obsidian scroll-mt-28">
             <Container>
                <AnimatedSection from="none">
                   <div className="max-w-4xl mx-auto text-center space-y-8">
@@ -387,7 +387,7 @@ export default async function HomePage() {
                         <Button href="/contact" variant="primary">
                            Book Discovery Call
                         </Button>
-                        <Button href="/consulting" variant="secondary">
+                        <Button href="/Audit" variant="secondary">
                            See Audit Scope
                         </Button>
                      </div>

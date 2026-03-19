@@ -1,144 +1,155 @@
 import Link from "next/link";
-import { FaLinkedin, FaYoutube, FaGithub, FaTwitter, FaEnvelope } from "react-icons/fa";
+import { FaLinkedin, FaYoutube } from "react-icons/fa";
 
 export default function Footer({ socialLinks = [] }) {
-   // Map platform names to icons - prioritizing professional networks
-   const iconMap = {
-      linkedin: FaLinkedin,
-      youtube: FaYoutube,
-      twitter: FaTwitter,
-      github: FaGithub,
-      email: FaEnvelope, // Placeholder icon for email
-   };
-
    const currentYear = new Date().getFullYear();
+   const socialMap = new Map((socialLinks || []).map((item) => [String(item.platform || "").toLowerCase(), item.url]));
+
+   const linkedinUrl = socialMap.get("linkedin") || "https://linkedin.com/in/gayanrr";
+   const youtubeUrl = socialMap.get("youtube") || "https://youtube.com/@gayandesilva";
+   const emailAddress = "gayan@gayandesilva.com";
+   const calendlyUrl = "https://calendly.com/gayandesilva";
+   const phoneNumber = "+49 155 60 440022";
+   const phoneHref = "tel:+4915560440022";
 
    return (
-      <footer className="relative bg-obsidian mt-32">
-         {/* Subtle gradient separator */}
-         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate/40 to-transparent"></div>
-
-         {/* Main footer content */}
-         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16">
-               {/* Brand Column - Takes more space for impact */}
-               <div className="md:col-span-5 lg:col-span-4">
-                  <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">Gayan de Silva, PhD</h3>
-                  <p className="text-steel text-sm leading-relaxed max-w-sm">AI/ML Consulting & Innovation</p>
-                  <p className="text-steel/70 text-xs mt-4 leading-relaxed max-w-sm">
-                     Strategic artificial intelligence solutions for enterprise transformation
+      <footer className="relative bg-obsidian mt-28 border-t border-gold/15">
+         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-14">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+               <div>
+                  <h3 className="text-xl font-semibold text-white mb-3 tracking-tight">Gayan de Silva, PhD</h3>
+                  <p className="text-steel text-sm leading-relaxed max-w-sm">
+                     AI compliance audits for teams running production AI. EU AI Act readiness with clear technical
+                     findings and practical remediation.
                   </p>
                </div>
 
-               {/* Navigation Column */}
-               <div className="md:col-span-3 lg:col-span-3">
-                  <h4 className="text-platinum text-sm font-semibold tracking-wide uppercase mb-6">Navigation</h4>
-                  <ul className="space-y-3">
+               <div>
+                  <h4 className="text-gold text-xs font-semibold tracking-[0.12em] uppercase mb-4">The Audit</h4>
+                  <ul className="space-y-2.5">
                      <li>
                         <Link
-                           href="/"
+                           href="/#diagnostic"
                            className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
-                           Home
+                           Free ACAI Diagnostic
                         </Link>
                      </li>
                      <li>
                         <Link
-                           href="/about"
+                           href="/#methodology"
                            className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
-                           About
+                           5 Technical Tests
                         </Link>
                      </li>
                      <li>
                         <Link
-                           href="/consulting"
+                           href="/Audit#investment"
                            className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
-                           AI/ML Consulting
+                           Investment
                         </Link>
                      </li>
                      <li>
                         <Link
-                           href="/tools"
+                           href="/#contact"
                            className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
-                           Free Tools
-                        </Link>
-                     </li>
-                     <li>
-                        <Link
-                           href="/insights"
-                           className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
-                           Insights
-                        </Link>
-                     </li>
-                     <li>
-                        <Link
-                           href="/contact"
-                           className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
-                           Contact
+                           Book Discovery Call
                         </Link>
                      </li>
                   </ul>
                </div>
 
-               {/* Professional Presence Column */}
-               <div className="md:col-span-4 lg:col-span-5">
-                  <h4 className="text-platinum text-sm font-semibold tracking-wide uppercase mb-6">Connect</h4>
-                  <div className="flex items-center gap-4">
-                     {socialLinks.length > 0 ? (
-                        socialLinks.map((link) => {
-                           const Icon = iconMap[link.platform];
-                           return Icon ? (
-                              <a
-                                 key={link.platform}
-                                 href={link.url}
-                                 target="_blank"
-                                 rel="noopener noreferrer"
-                                 aria-label={`Visit our ${link.platform}`}
-                                 className="w-10 h-10 flex items-center justify-center rounded-md bg-charcoal/50 hover:bg-charcoal border border-slate/20 hover:border-electric/30 text-steel hover:text-platinum transition-all duration-300 hover:-translate-y-0.5">
-                                 <Icon size={18} />
-                              </a>
-                           ) : null;
-                        })
-                     ) : (
-                        // Default professional links if no socialLinks provided
-                        <>
-                           <a
-                              href="https://linkedin.com"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              aria-label="Visit our LinkedIn"
-                              className="w-10 h-10 flex items-center justify-center rounded-md bg-charcoal/50 hover:bg-charcoal border border-slate/20 hover:border-slate/40 text-steel hover:text-platinum transition-all duration-300">
-                              <FaLinkedin size={18} />
-                           </a>
-                           <a
-                              href="https://youtube.com"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              aria-label="Visit our YouTube"
-                              className="w-10 h-10 flex items-center justify-center rounded-md bg-charcoal/50 hover:bg-charcoal border border-slate/20 hover:border-slate/40 text-steel hover:text-platinum transition-all duration-300">
-                              <FaYoutube size={18} />
-                           </a>
-                           <a
-                              href="https://github.com"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              aria-label="Visit our GitHub"
-                              className="w-10 h-10 flex items-center justify-center rounded-md bg-charcoal/50 hover:bg-charcoal border border-slate/20 hover:border-slate/40 text-steel hover:text-platinum transition-all duration-300">
-                              <FaGithub size={18} />
-                           </a>
-                        </>
-                     )}
+               <div>
+                  <h4 className="text-gold text-xs font-semibold tracking-[0.12em] uppercase mb-4">Insights</h4>
+                  <ul className="space-y-2.5">
+                     <li>
+                        <Link
+                           href="/insights"
+                           className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
+                           All Insights
+                        </Link>
+                     </li>
+                     <li>
+                        <Link
+                           href="/insights#linkedin"
+                           className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
+                           LinkedIn Posts
+                        </Link>
+                     </li>
+                     <li>
+                        <Link
+                           href="/insights#youtube"
+                           className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
+                           YouTube Videos
+                        </Link>
+                     </li>
+                  </ul>
+               </div>
+
+               <div>
+                  <h4 className="text-gold text-xs font-semibold tracking-[0.12em] uppercase mb-4">Connect</h4>
+                  <ul className="space-y-2.5 mb-4">
+                     <li>
+                        <a
+                           href={`mailto:${emailAddress}`}
+                           className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
+                           {emailAddress}
+                        </a>
+                     </li>
+                     <li>
+                        <a
+                           href={linkedinUrl}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
+                           LinkedIn
+                        </a>
+                     </li>
+                     <li>
+                        <a
+                           href={calendlyUrl}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
+                           Book a Call
+                        </a>
+                     </li>
+                     <li>
+                        <a
+                           href={phoneHref}
+                           className="text-steel hover:text-platinum text-sm transition-colors duration-300 inline-block">
+                           {phoneNumber}
+                        </a>
+                     </li>
+                  </ul>
+
+                  <div className="flex items-center gap-3">
+                     <a
+                        href={linkedinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedIn"
+                        className="w-8 h-8 flex items-center justify-center rounded-md border border-slate/20 text-steel hover:text-platinum hover:border-electric/35 transition-colors duration-300">
+                        <FaLinkedin size={14} />
+                     </a>
+                     <a
+                        href={youtubeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="YouTube"
+                        className="w-8 h-8 flex items-center justify-center rounded-md border border-slate/20 text-steel hover:text-platinum hover:border-electric/35 transition-colors duration-300">
+                        <FaYoutube size={14} />
+                     </a>
                   </div>
                </div>
             </div>
 
-            {/* Trust & Meta Section */}
-            <div className="mt-16 pt-8 border-t border-slate/20">
-               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                  <div className="text-steel/60 text-xs tracking-wide">
+            <div className="mt-12 pt-6 border-t border-slate/20">
+               <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                  <div className="text-steel/60 text-xs tracking-wide leading-relaxed">
                      <p>© {currentYear} Gayan de Silva, PhD. All rights reserved.</p>
                   </div>
-                  <div className="text-steel/60 text-xs tracking-wide">
-                     <p>Enterprise AI Consulting</p>
+                  <div className="text-steel/60 text-xs tracking-wide leading-relaxed">
+                     <p>PhD AI/ML · US Patent US12073438B2 · SRH University Hamburg</p>
                   </div>
                </div>
             </div>

@@ -13,7 +13,7 @@ export default function sitemap() {
          priority: 0.8,
       },
       {
-         url: "https://yoursite.com/consulting",
+         url: "https://yoursite.com/Audit",
          lastModified: new Date(),
          changeFrequency: "monthly",
          priority: 0.9,

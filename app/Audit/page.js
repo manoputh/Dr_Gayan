@@ -3,7 +3,6 @@ import SectionHeading from "@/components/SectionHeading";
 import ServiceCard from "@/components/ServiceCard";
 import AnimatedSection from "@/components/AnimatedSection";
 import Button from "@/components/Button";
-import ConsultingForm from "./ConsultingForm";
 
 const AI_AUDIT_INCLUDED = [
    {
@@ -99,6 +98,27 @@ const AI_AUDIT_PROCESS = [
       step: "04",
       title: "Remediation Roadmap",
       description: "Deliver a 90-day plan with owners, sequencing, and milestones.",
+   },
+];
+
+const AI_AUDIT_INVESTMENT = [
+   {
+      _id: "inv-1",
+      title: "AI Act Readiness Scan",
+      details: "From € 8,000 - scope depends on number of AI systems - 2 days",
+      price: "From € 8,000",
+   },
+   {
+      _id: "inv-2",
+      title: "Full Compliance Audit",
+      details: "From € 25,000 - full technical audit across all 5 dimensions - 4 weeks",
+      price: "From € 25,000",
+   },
+   {
+      _id: "inv-3",
+      title: "Ongoing Compliance Retainer",
+      details: "From € 4,000/month - post-audit monitoring and ongoing advisory",
+      price: "From € 4,000/mo",
    },
 ];
 
@@ -201,20 +221,37 @@ export default function ConsultingPage() {
                </div>
             </AnimatedSection>
 
-            {/* CTA */}
+            {/* Investment */}
             <AnimatedSection>
-               <div className="max-w-4xl mx-auto text-center bg-gradient-to-r from-electric/5 to-gold/5 border border-slate/20 p-10 rounded-lg mb-20">
-                  <h3 className="text-3xl font-serif font-bold text-white mb-4">Book Your AI Audit</h3>
-                  <p className="text-steel mb-8 text-lg max-w-2xl mx-auto">
-                     Get a clear picture of exposure, prioritized findings, and a practical roadmap your teams can
-                     implement.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+               <div
+                  id="investment"
+                  className="bg-charcoal p-8 md:p-12 rounded-lg border border-slate/20 mb-20 scroll-mt-28">
+                  <div className="max-w-3xl mx-auto text-center mb-10">
+                     <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Investment</h2>
+                     <p className="text-platinum/70 leading-relaxed">
+                        Select the engagement model that matches your current exposure and desired speed.
+                     </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                     {AI_AUDIT_INVESTMENT.map((item) => (
+                        <div
+                           key={item._id}
+                           className="bg-obsidian/50 border border-slate/20 rounded-lg p-6 transition-all duration-300 hover:border-electric/30 hover:-translate-y-1">
+                           <h3 className="text-xl font-semibold text-white mb-3">{item.title}</h3>
+                           <p className="text-sm text-platinum/75 leading-relaxed mb-4">{item.details}</p>
+                           <p className="text-lg font-semibold text-electric">{item.price}</p>
+                        </div>
+                     ))}
+                  </div>
+
+                  <div className="text-center">
+                     <p className="text-sm text-steel mb-6">
+                        Final investment is confirmed during discovery based on systems, risk profile, and delivery
+                        scope.
+                     </p>
                      <Button href="/contact" variant="primary">
                         Book Discovery Call
-                     </Button>
-                     <Button href="/contact" variant="secondary">
-                        Request Audit Scope
                      </Button>
                   </div>
                </div>
@@ -249,17 +286,6 @@ export default function ConsultingPage() {
                         </Button>
                      </div>
                   </div>
-               </div>
-            </AnimatedSection>
-
-            {/* Consultation Form */}
-            <AnimatedSection>
-               <div id="audit-inquiry">
-                  <div className="max-w-3xl mx-auto text-center mb-10">
-                     <h3 className="text-2xl font-serif font-bold text-white mb-3">Start Your AI Audit Inquiry</h3>
-                     <p className="text-steel">Share your context and we will recommend the right audit scope.</p>
-                  </div>
-                  <ConsultingForm />
                </div>
             </AnimatedSection>
          </Container>

@@ -22,7 +22,7 @@ Dr_Gayan/
 │   ├── about/                    # About page
 │   ├── blog/                     # Blog listing and posts
 │   │   └── [slug]/              # Dynamic blog post pages
-│   ├── consulting/              # Services and inquiry form
+│   ├── Audit/                   # Services and inquiry form
 │   ├── contact/                 # Contact page
 │   ├── videos/                  # Video gallery
 │   ├── layout.js                # Root layout with nav/footer

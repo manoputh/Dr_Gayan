@@ -391,7 +391,7 @@ export default function InsightsHub({ insights }) {
                   </div>
 
                   {linkedInItems.length > 0 && (
-                     <div className="mb-10">
+                     <div id="linkedin" className="mb-10 scroll-mt-28">
                         <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate/20">
                            <FaLinkedin className="text-electric text-lg" />
                            <h2 className="text-2xl font-serif font-semibold text-white">LinkedIn Posts</h2>
@@ -408,7 +408,7 @@ export default function InsightsHub({ insights }) {
                   )}
 
                   {youTubeItems.length > 0 && (
-                     <div className="mb-10">
+                     <div id="youtube" className="mb-10 scroll-mt-28">
                         <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate/20">
                            <FaYoutube className="text-red-500 text-lg" />
                            <h2 className="text-2xl font-serif font-semibold text-white">YouTube Videos</h2>

@@ -120,7 +120,7 @@ export default function ToolsPage() {
                      <Button href="/contact" variant="primary">
                         Book Diagnostic Debrief
                      </Button>
-                     <Button href="/consulting" variant="secondary">
+                     <Button href="/Audit" variant="secondary">
                         Explore AI Audit Service
                      </Button>
                   </div>

@@ -14,7 +14,7 @@ export default function Navbar() {
    const navLinks = [
       { name: "Home", href: "/", icon: FaHome },
       { name: "About", href: "/about", icon: FaUser },
-      { name: "AI Audit", href: "/consulting", icon: FaBriefcase },
+      { name: "AI Audit", href: "/Audit", icon: FaBriefcase },
       { name: "Free Tools", href: "/tools", icon: FaChartLine },
       { name: "Insights", href: "/insights", icon: FaLightbulb },
       { name: "Contact", href: "/contact", icon: FaEnvelope },
