@@ -4,54 +4,6 @@ import ServiceCard from "@/components/ServiceCard";
 import AnimatedSection from "@/components/AnimatedSection";
 import Button from "@/components/Button";
 
-const AI_AUDIT_INCLUDED = [
-   {
-      _id: "inc-1",
-      title: "AI System Inventory & Risk Classification",
-      description:
-         "Map every production AI system, classify risk levels, and identify where compliance obligations are highest.",
-      icon: "FaLightbulb",
-      features: ["System Register", "Risk Tier Mapping", "Critical-System Prioritization", "Ownership Assignment"],
-   },
-   {
-      _id: "inc-2",
-      title: "Model Reliability & Calibration Review",
-      description:
-         "Validate whether model outputs are stable, reliable, and suitable for operational and compliance expectations.",
-      icon: "FaBrain",
-      features: [
-         "Reliability Testing",
-         "Calibration Assessment",
-         "Failure Pattern Analysis",
-         "Severity-Based Findings",
-      ],
-   },
-   {
-      _id: "inc-3",
-      title: "Data Drift & Control Gap Analysis",
-      description:
-         "Identify where data distribution has shifted and where monitoring, quality, and governance controls are missing.",
-      icon: "FaDatabase",
-      features: ["Drift Detection", "Data Quality Risks", "Monitoring Gaps", "Control Recommendations"],
-   },
-   {
-      _id: "inc-4",
-      title: "Explainability & Documentation Readiness",
-      description:
-         "Assess whether model explanations and documentation can support stakeholder decisions and regulatory scrutiny.",
-      icon: "FaCog",
-      features: ["Explainability Review", "Documentation Completeness", "Traceability Checks", "Governance Readiness"],
-   },
-   {
-      _id: "inc-5",
-      title: "Executive Findings Register & 90-Day Plan",
-      description:
-         "Deliver a practical, prioritized remediation roadmap with owners, milestones, and measurable outcomes.",
-      icon: "FaRobot",
-      features: ["Article-Mapped Findings", "Priority Ranking", "Named Owners", "90-Day Execution Roadmap"],
-   },
-];
-
 const AI_AUDIT_WHY = [
    {
       _id: "why-1",
@@ -178,25 +130,6 @@ export default function ConsultingPage() {
                {AI_AUDIT_WHY.map((item, index) => (
                   <AnimatedSection key={item._id} delay={index * 100} from="bottom">
                      <ServiceCard service={item} />
-                  </AnimatedSection>
-               ))}
-            </div>
-
-            {/* What Is Included */}
-            <AnimatedSection>
-               <div className="max-w-3xl mx-auto text-center mb-14">
-                  <h2 className="text-4xl lg:text-5xl font-serif font-bold text-white mb-6">What Is Included</h2>
-                  <p className="text-lg text-platinum/70 leading-relaxed">
-                     Five audit workstreams that cover technical integrity, governance readiness, and business-focused
-                     remediation.
-                  </p>
-               </div>
-            </AnimatedSection>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-               {AI_AUDIT_INCLUDED.map((service, index) => (
-                  <AnimatedSection key={service._id} delay={index * 100} from="bottom">
-                     <ServiceCard service={service} />
                   </AnimatedSection>
                ))}
             </div>
